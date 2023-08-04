@@ -9,10 +9,15 @@ namespace Assets.Sources.Infrastructure
 
         public Game()
         {
-            if(SystemInfo.deviceType == DeviceType.Desktop)
+            RegisterInputService();
+        }
+
+        private void RegisterInputService()
+        {
+            if (SystemInfo.deviceType == DeviceType.Desktop)
                 InputSurvice = new StandaloneInputService();
             else
-                InputSurvice = new MobileInputService();    
+                InputSurvice = new MobileInputService();
         }
     }
 }
