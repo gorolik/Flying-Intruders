@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Sources.Infrastructure
+namespace Sources.Infrastructure
 {
     public class Bootstrap : MonoBehaviour
     {

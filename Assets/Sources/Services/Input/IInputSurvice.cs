@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Sources.Services.Input
+namespace Sources.Services.Input
 {
-    interface IInputSurvice
+    public interface IInputSurvice
     {
         Vector2 CursorPosition { get; }
     }

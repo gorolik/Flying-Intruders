@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Sources.Services.Input
+namespace Sources.Services.Input
 {
-    class StandaloneInputService : InputService
+    public class StandaloneInputService : InputService
     {
         public override Vector2 CursorPosition 
             => UnityEngine.Input.mousePosition;

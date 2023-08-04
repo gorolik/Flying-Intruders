@@ -1,11 +1,11 @@
-﻿using Assets.Sources.Services.Input;
+﻿using Sources.Services.Input;
 using UnityEngine;
 
-namespace Assets.Sources.Infrastructure
+namespace Sources.Infrastructure
 {
-    internal class Game
+    public class Game
     {
-        public IInputSurvice InputSurvice;
+        public static IInputSurvice InputSurvice;
 
         public Game()
         {
