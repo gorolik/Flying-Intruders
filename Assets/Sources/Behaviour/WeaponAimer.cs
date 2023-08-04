@@ -24,6 +24,13 @@ namespace Sources.Behaviour
 
         private void Update()
         {
+            Vector2 worldCursorPosition = GetWorldCursorPosition();
+
+            _weapon.transform.LookAt2D(worldCursorPosition);
+        }
+
+        private Vector2 GetWorldCursorPosition()
+        {
             Vector2 worldCursorPosition = _camera.ScreenToWorldPoint(_inputSurvice.CursorPosition);
 
             if (worldCursorPosition == Vector2.zero)
@@ -31,7 +38,7 @@ namespace Sources.Behaviour
 
             _previousCursorPosition = worldCursorPosition;
 
-            _weapon.transform.LookAt2D(worldCursorPosition);
+            return worldCursorPosition;
         }
     }
 }
