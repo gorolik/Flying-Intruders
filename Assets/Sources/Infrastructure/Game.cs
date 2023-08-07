@@ -1,23 +1,16 @@
-﻿using Sources.Services.Input;
-using UnityEngine;
+﻿using Assets.Sources.Infrastructure;
+using Sources.Services.Input;
 
 namespace Sources.Infrastructure
 {
     public class Game
     {
         public static IInputSurvice InputSurvice;
+        public GameStateMachine StateMachine;
 
         public Game()
         {
-            RegisterInputService();
-        }
-
-        private void RegisterInputService()
-        {
-            if (SystemInfo.deviceType == DeviceType.Desktop)
-                InputSurvice = new StandaloneInputService();
-            else
-                InputSurvice = new MobileInputService();
+            StateMachine= new GameStateMachine();
         }
     }
 }

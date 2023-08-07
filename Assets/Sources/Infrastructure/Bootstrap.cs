@@ -1,3 +1,4 @@
+using Assets.Sources.Infrastructure;
 using UnityEngine;
 
 namespace Sources.Infrastructure
@@ -9,6 +10,7 @@ namespace Sources.Infrastructure
         private void Awake()
         {
             _game = new Game();
+            _game.StateMachine.Enter<BootstrapState>();
 
             DontDestroyOnLoad(this);
         }
