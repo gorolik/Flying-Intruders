@@ -2,7 +2,7 @@
 using Sources.Services.Input;
 using UnityEngine;
 
-namespace Assets.Sources.Infrastructure
+namespace Sources.Infrastructure
 {
     public class BootstrapState : IState
     {
@@ -25,7 +25,7 @@ namespace Assets.Sources.Infrastructure
 
         private void EnterLoadLevel()
         {
-
+            _gameStateMachine.Enter<LoadLevelState, string>("Game");
         }
 
         public void Exit()

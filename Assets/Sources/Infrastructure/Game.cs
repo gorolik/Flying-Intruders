@@ -1,4 +1,4 @@
-﻿using Assets.Sources.Infrastructure;
+﻿using Sources.Infrastructure;
 using Sources.Services.Input;
 
 namespace Sources.Infrastructure

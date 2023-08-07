@@ -15,9 +15,15 @@ namespace Sources.Infrastructure
         public void Load(string name, Action onLoaded = null) =>
             _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
 
-        private IEnumerator LoadScene(string name, Action onLoaded = null)
+        private IEnumerator LoadScene(string nextSceneName, Action onLoaded = null)
         {
-            AsyncOperation waitLoadScene = SceneManager.LoadSceneAsync(name);
+            if(SceneManager.GetActiveScene().name == nextSceneName)
+            {
+                onLoaded?.Invoke();
+                yield break;
+            }
+
+            AsyncOperation waitLoadScene = SceneManager.LoadSceneAsync(nextSceneName);
 
             while(waitLoadScene.isDone == false)
             {
