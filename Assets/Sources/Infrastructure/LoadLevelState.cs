@@ -7,23 +7,29 @@ namespace Sources.Infrastructure
         private const string _spawnPointTag = "SpawnPoint";
         private const string _weaponPath = "Weapon";
         private const string _hudPath = "HUD";
+
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
+        private Curtain _curtain;
+
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
+            _curtain = curtain;
         }
 
         public void Enter(string sceneName)
         {
+            _curtain.Show();
+
             _sceneLoader.Load(sceneName, OnLevelLoaded);
         }
 
         public void Exit()
         {
-
+            _curtain.Hide();
         }
 
         private void OnLevelLoaded()
@@ -32,6 +38,8 @@ namespace Sources.Infrastructure
 
             var weapon = Instantiate(_weaponPath, spawnPoint.transform.position);
             var hud = Instantiate(_hudPath);
+
+            _gameStateMachine.Enter<GameLoopState>();
         }
 
         private GameObject Instantiate(string path, Vector3 position)

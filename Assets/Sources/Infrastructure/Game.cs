@@ -8,9 +8,9 @@ namespace Sources.Infrastructure
         public static IInputSurvice InputSurvice;
         public GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner)
+        public Game(ICoroutineRunner coroutineRunner, Curtain curtain)
         {
-            StateMachine= new GameStateMachine(new SceneLoader(coroutineRunner));
+            StateMachine= new GameStateMachine(new SceneLoader(coroutineRunner), curtain);
         }
     }
 }
