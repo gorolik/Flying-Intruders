@@ -3,6 +3,8 @@ using Sources.Infrastructure.Services;
 using Sources.Infrastructure.States;
 using System;
 using System.Collections.Generic;
+using Sources.Behaviour;
+using Sources.Infrastructure.PersistentProgress;
 
 namespace Sources.Infrastructure
 {
@@ -16,7 +18,8 @@ namespace Sources.Infrastructure
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, services.Single<IGameFactory>()),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>()),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<ISaveLoadService>(), services.Single<IPersistentProgressService>()),
                 [typeof(GameLoopState)] = new GameLoopState(),
             };
         }

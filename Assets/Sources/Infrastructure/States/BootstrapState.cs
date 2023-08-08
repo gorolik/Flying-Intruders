@@ -1,6 +1,7 @@
 ﻿using Sources.Infrastructure.Services;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.Factory;
+using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Input;
 using UnityEngine;
 
@@ -34,13 +35,15 @@ namespace Sources.Infrastructure.States
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadLevelState, string>("Game");
+            _gameStateMachine.Enter<LoadProgressState>();
         }
 
         private void RegisterServices()
         {
             _services.RegisterSingle<IInputSurvice>(GetInputService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
+            _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService());
             _services.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssets>()));
         }
 

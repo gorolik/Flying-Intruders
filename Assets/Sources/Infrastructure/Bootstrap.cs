@@ -1,3 +1,4 @@
+using Sources.Behaviour;
 using Sources.Infrastructure.States;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Sources.Infrastructure
         [SerializeField] private Curtain _curtain;
 
         public static Bootstrap Instance;
-
+            
         private Game _game;
 
         private void Awake()
