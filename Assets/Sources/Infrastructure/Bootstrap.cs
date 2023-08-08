@@ -6,7 +6,7 @@ namespace Sources.Infrastructure
 {
     public class Bootstrap : MonoBehaviour, ICoroutineRunner
     {
-        [SerializeField] private Curtain _curtain;
+        [SerializeField] private Curtain _curtainPrefab;
 
         public static Bootstrap Instance;
             
@@ -14,7 +14,7 @@ namespace Sources.Infrastructure
 
         private void Awake()
         {
-            _game = new Game(this, _curtain);
+            _game = new Game(this, Instantiate(_curtainPrefab));
             _game.StateMachine.Enter<BootstrapState>();
 
             DontDestroyOnLoad(this);

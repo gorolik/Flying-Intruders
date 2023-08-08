@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 332113786715468090}
   - component: {fileID: 2631143008891914051}
   m_Layer: 0
-  m_Name: GameBoot
+  m_Name: Bootstrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c3a61af6f160a42aac6a60c42c79c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _curtainPrefab: {fileID: 3618481037979075798, guid: 2078a7bdc09589d41ac5860f9026eab7, type: 3}
