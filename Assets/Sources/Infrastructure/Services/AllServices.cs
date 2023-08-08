@@ -1,4 +1,6 @@
-﻿namespace Sources.Infrastructure.Services
+﻿using Sources.Infrastructure.PersistentProgress;
+
+namespace Sources.Infrastructure.Services
 {
     public class AllServices
     {

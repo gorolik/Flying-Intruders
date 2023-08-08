@@ -21,7 +21,7 @@ namespace Sources.Infrastructure.PersistentProgress
             foreach (ISavedProgressUpdater progressUpdater in _gameFactory._savedProgressUpdaters)
                 progressUpdater.UpdateProgress(_progressService.PlayerProgress);
 
-            PlayerPrefs.GetString(_progressKey, _progressService.PlayerProgress.ToJson());
+            PlayerPrefs.SetString(_progressKey, _progressService.PlayerProgress.ToJson());
         }
 
         public PlayerProgress LoadProgress() => 

@@ -9,7 +9,8 @@ namespace Sources.Infrastructure.States
 {
     public class BootstrapState : IState
     {
-        private const string InitialScene = "Initial";
+        private const string _initialScene = "Initial";
+        
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly AllServices _services;
@@ -23,10 +24,8 @@ namespace Sources.Infrastructure.States
             RegisterServices();
         }
 
-        public void Enter()
-        {
-            _sceneLoader.Load(InitialScene, EnterLoadLevel);
-        }
+        public void Enter() => 
+            _sceneLoader.Load(_initialScene, EnterLoadLevel);
 
         public void Exit()
         {
@@ -43,8 +42,8 @@ namespace Sources.Infrastructure.States
             _services.RegisterSingle<IInputSurvice>(GetInputService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(AllServices.Container.Single<IAssets>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>()));
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
         }
 
         private IInputSurvice GetInputService()
