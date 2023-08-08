@@ -4,6 +4,8 @@ namespace Sources.Infrastructure
 {
     internal class LoadLevelState : IPayloadState<string>
     {
+        private const string _weaponSpawnPointTag = "SpawnPoint";
+
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
@@ -31,7 +33,7 @@ namespace Sources.Infrastructure
 
         private void OnLevelLoaded()
         {
-            GameObject weapon = _gameFactory.CreateWeapon();
+            GameObject weapon = _gameFactory.CreateWeapon(GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
 
             _gameStateMachine.Enter<GameLoopState>();
