@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Sources.Infrastructure.Factory;
+using Sources.Infrastructure.Services;
+using UnityEngine;
 
-namespace Sources.Infrastructure
+namespace Sources.Infrastructure.States
 {
     internal class LoadLevelState : IPayloadState<string>
     {
@@ -12,11 +14,12 @@ namespace Sources.Infrastructure
 
         private Curtain _curtain;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain, IGameFactory gameFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
+            _gameFactory = gameFactory;
         }
 
         public void Enter(string sceneName)

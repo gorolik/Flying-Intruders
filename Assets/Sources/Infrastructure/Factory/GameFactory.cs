@@ -1,7 +1,7 @@
 ﻿using Sources.Infrastructure.AssetManagement;
 using UnityEngine;
 
-namespace Sources.Infrastructure
+namespace Sources.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {

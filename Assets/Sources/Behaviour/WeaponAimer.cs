@@ -1,4 +1,4 @@
-using Sources.Infrastructure;
+using Sources.Infrastructure.Services;
 using Sources.Services.Input;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace Sources.Behaviour
 
         private void Awake()
         {
-            _inputSurvice = Game.InputSurvice;
+            _inputSurvice = AllServices.Container.Single<IInputSurvice>();
         }
 
         private void Start()

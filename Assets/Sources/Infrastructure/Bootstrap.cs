@@ -1,4 +1,4 @@
-using Sources.Infrastructure;
+using Sources.Infrastructure.States;
 using UnityEngine;
 
 namespace Sources.Infrastructure

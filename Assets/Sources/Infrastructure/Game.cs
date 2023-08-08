@@ -1,16 +1,14 @@
-﻿using Sources.Infrastructure;
-using Sources.Services.Input;
+﻿using Sources.Infrastructure.Services;
 
 namespace Sources.Infrastructure
 {
     public class Game
     {
-        public static IInputSurvice InputSurvice;
         public GameStateMachine StateMachine;
 
         public Game(ICoroutineRunner coroutineRunner, Curtain curtain)
         {
-            StateMachine= new GameStateMachine(new SceneLoader(coroutineRunner), curtain);
+            StateMachine= new GameStateMachine(new SceneLoader(coroutineRunner), curtain, AllServices.Container);
         }
     }
 }
