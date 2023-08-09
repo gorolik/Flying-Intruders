@@ -2,12 +2,12 @@
 
 namespace Sources.Services.Input
 {
-    public class StandaloneInputService : InputService
+    public class StandaloneInputService : IInputSurvice
     {
-        public override Vector2 CursorPosition 
+        public Vector2 CursorPosition 
             => UnityEngine.Input.mousePosition;
 
-        public override bool IsClicked =>
+        public bool IsClicked =>
             UnityEngine.Input.GetMouseButton(0);
     }
 }

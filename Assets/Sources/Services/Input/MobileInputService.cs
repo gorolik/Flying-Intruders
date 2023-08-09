@@ -2,12 +2,12 @@
 
 namespace Sources.Services.Input
 {
-    public class MobileInputService : InputService
+    public class MobileInputService : IInputSurvice
     {
-        public override Vector2 CursorPosition => 
+        public Vector2 CursorPosition => 
             UnityEngine.Input.GetTouch(0).position;
 
-        public override bool IsClicked =>
+        public bool IsClicked =>
             UnityEngine.Input.touchCount > 0;
     }
 }
