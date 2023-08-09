@@ -6,26 +6,25 @@ namespace Sources.Behaviour.Projectile
     public class ProjectileMover : MonoBehaviour
     {
         private const int _flyerLayer = 6;
-        private const float _destroyDelay = 0.1f;
+        private const float _destroyDelay = 0.01f;
 
         private Vector2 _direction;
-        private float _projectileSpeed;
-        private float _damage;
-        private bool _inited;
         private Vector2 _previousPosition;
+        private float _projectileSpeed;
         private int _layerMask;
+        private bool _isInited;
+        private bool _isCollided;
 
         public event Action<RaycastHit2D> OnCollided; 
 
-        public void Init(Vector2 direction, float projectileSpeed, float damage)
+        public void Init(Vector2 direction, float projectileSpeed)
         {
             _direction = direction;
             _projectileSpeed = projectileSpeed;
-            _damage = damage;
 
             _layerMask = 1 << _flyerLayer;
             
-            _inited = true;
+            _isInited = true;
         }
 
         private void Update() => 
@@ -33,12 +32,15 @@ namespace Sources.Behaviour.Projectile
 
         private void MoveAndTryCollide()
         {
-            if (_inited == true)
+            if (ShouldMove())
             {
                 Move();
                 TryCollide();
             }
         }
+
+        private bool ShouldMove() => 
+            _isInited && !_isCollided;
 
         private void Move()
         {
@@ -48,13 +50,17 @@ namespace Sources.Behaviour.Projectile
 
         private void TryCollide()
         {
-            if (IsCollided(out RaycastHit2D hit))
-            {
-                transform.position = hit.point;
-                Destroy(gameObject, _destroyDelay);
-                
-                OnCollided?.Invoke(hit);
-            }
+            if (IsCollided(out RaycastHit2D hit)) 
+                Collided(hit);
+        }
+
+        private void Collided(RaycastHit2D hit)
+        {
+            transform.position = hit.point;
+            Destroy(gameObject, _destroyDelay);
+
+            _isCollided = true;
+            OnCollided?.Invoke(hit);
         }
 
         private bool IsCollided(out RaycastHit2D hit)

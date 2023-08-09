@@ -36,7 +36,7 @@ namespace Sources.Behaviour.Weapon
         {
             _currentCooldown = _cooldown;
 
-            ProjectileMover projectile = _gameFactory.CreateProjectile(_muzzlePoint.position).GetComponent<ProjectileMover>();
+            ProjectileUnit projectile = _gameFactory.CreateProjectile(_muzzlePoint.position).GetComponent<ProjectileUnit>();
             projectile.Init(_muzzlePoint.up, _projectileSpeed, _damage);
         }
 
