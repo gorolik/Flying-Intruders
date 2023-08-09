@@ -1,5 +1,5 @@
-﻿using Sources.Infrastructure.Services;
-using Sources.Infrastructure.AssetManagement;
+﻿using Sources.Infrastructure.AssetManagement;
+using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Input;

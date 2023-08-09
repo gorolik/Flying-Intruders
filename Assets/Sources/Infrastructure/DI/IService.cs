@@ -1,4 +1,4 @@
-﻿namespace Sources.Infrastructure.Services
+﻿namespace Sources.Infrastructure.DI
 {
     public interface IService
     {

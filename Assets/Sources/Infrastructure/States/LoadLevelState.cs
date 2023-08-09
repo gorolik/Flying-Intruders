@@ -47,7 +47,7 @@ namespace Sources.Infrastructure.States
 
         private void InformProgressReaders()
         {
-            foreach (ISavedProgressReader progressReader in _gameFactory._savedProgressReaders)
+            foreach (ISavedProgressReader progressReader in _gameFactory.SavedProgressReaders)
                 progressReader.LoadProgress(_progressService.PlayerProgress);
         }
 
@@ -56,6 +56,7 @@ namespace Sources.Infrastructure.States
             GameObject weapon =
                 _gameFactory.CreateWeapon(GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
+            _gameFactory.CreateHole();
         }
     }
 }

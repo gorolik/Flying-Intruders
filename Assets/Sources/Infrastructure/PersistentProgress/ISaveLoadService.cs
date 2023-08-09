@@ -1,4 +1,4 @@
-﻿using Sources.Infrastructure.Services;
+﻿using Sources.Infrastructure.DI;
 
 namespace Sources.Infrastructure.PersistentProgress
 {

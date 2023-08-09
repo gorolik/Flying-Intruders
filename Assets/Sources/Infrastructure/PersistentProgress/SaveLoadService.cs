@@ -18,7 +18,7 @@ namespace Sources.Infrastructure.PersistentProgress
 
         public void SaveProgress()
         {
-            foreach (ISavedProgressUpdater progressUpdater in _gameFactory._savedProgressUpdaters)
+            foreach (ISavedProgressUpdater progressUpdater in _gameFactory.SavedProgressUpdaters)
                 progressUpdater.UpdateProgress(_progressService.PlayerProgress);
 
             PlayerPrefs.SetString(_progressKey, _progressService.PlayerProgress.ToJson());

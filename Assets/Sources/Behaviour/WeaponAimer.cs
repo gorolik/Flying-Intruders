@@ -1,5 +1,5 @@
 using Sources.Behaviour.Extensions;
-using Sources.Infrastructure.Services;
+using Sources.Infrastructure.DI;
 using Sources.Services.Input;
 using UnityEngine;
 

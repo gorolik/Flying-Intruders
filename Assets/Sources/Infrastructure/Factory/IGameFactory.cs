@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Sources.Infrastructure.DI;
 using Sources.Infrastructure.PersistentProgress;
-using Sources.Infrastructure.Services;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Factory
 {
     public interface IGameFactory : IService
     {
-        List<ISavedProgressReader> _savedProgressReaders { get; }
-
-        List<ISavedProgressUpdater> _savedProgressUpdaters { get; }
+        List<ISavedProgressReader> SavedProgressReaders { get; }
+        List<ISavedProgressUpdater> SavedProgressUpdaters { get; }
+        Transform Hole { get; }
         
+        event Action HoleCreated;
+
+        void CreateHole();
         void CreateHud();
+        GameObject CreateEnemy(Vector2 position);
         GameObject CreateWeapon(Vector2 position);
         void CleanUp();
     }

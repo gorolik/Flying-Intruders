@@ -1,5 +1,5 @@
-﻿using Sources.Infrastructure.PersistentProgress;
-using Sources.Infrastructure.Services;
+﻿using Sources.Infrastructure.DI;
+using Sources.Infrastructure.PersistentProgress;
 using TMPro;
 using UnityEngine;
 

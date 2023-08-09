@@ -1,6 +1,4 @@
-﻿using Sources.Infrastructure.PersistentProgress;
-
-namespace Sources.Infrastructure.Services
+﻿namespace Sources.Infrastructure.DI
 {
     public class AllServices
     {

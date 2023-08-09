@@ -1,4 +1,4 @@
-﻿using Sources.Infrastructure.Services;
+﻿using Sources.Infrastructure.DI;
 using UnityEngine;
 
 namespace Sources.Infrastructure.AssetManagement
