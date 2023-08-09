@@ -7,10 +7,10 @@ namespace Sources.Behaviour.Projectile
         [SerializeField] private ProjectileMover _mover;
         [SerializeField] private ProjectileDamager _damager;
 
-        public void Init(Vector2 moveDirection, float projectileSpeed, float damage)
+        public void Init(ProjectileProperties properties, Vector2 direction)
         {
-            _mover.Init(moveDirection, projectileSpeed);
-            _damager.Init(damage);
+            _mover.Init(direction, properties.Speed);
+            _damager.Init(properties.Damage);
         }
 
         private void OnEnable() => 

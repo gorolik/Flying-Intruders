@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6756884254395193461}
   - component: {fileID: 2519104582031103525}
   - component: {fileID: 5250930173131441054}
+  - component: {fileID: 3526947711628288002}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -92,9 +93,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 1
+  _projectileFactory: {fileID: 3526947711628288002}
   _muzzlePoint: {fileID: 3143972928824495837}
-  _projectileSpeed: 14
-  _damage: 5
+  _projectileProperties:
+    Speed: 15
+    Damage: 5
+--- !u!114 &3526947711628288002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559164276696282819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b441fc77c99f2248a5591e9ce384d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5514118733269338554
 GameObject:
   m_ObjectHideFlags: 0
