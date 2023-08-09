@@ -5,6 +5,7 @@
         public const string WeaponPath = "Weapon";
         public const string HudPath = "HUD";
         public const string HolePath = "HolePoint";
-        public const string EnemyPath = "Flyer";
+        public const string FlyEnemyPath = "Enemys/Fly";
+        public const string ProjectilePath = "Projectile";
     }
 }

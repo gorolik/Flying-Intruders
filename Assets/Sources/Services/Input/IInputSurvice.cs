@@ -6,5 +6,6 @@ namespace Sources.Services.Input
     public interface IInputSurvice : IService
     {
         Vector2 CursorPosition { get; }
+        bool IsClicked { get; }
     }
 }

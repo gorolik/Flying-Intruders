@@ -18,6 +18,7 @@ namespace Sources.Infrastructure.Factory
         void CreateHud();
         GameObject CreateEnemy(Vector2 position);
         GameObject CreateWeapon(Vector2 position);
+        GameObject CreateProjectile(Vector2 muzzlePointPosition);
         void CleanUp();
     }
 }

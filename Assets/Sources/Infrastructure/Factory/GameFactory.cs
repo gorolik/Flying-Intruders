@@ -24,8 +24,11 @@ namespace Sources.Infrastructure.Factory
         public GameObject CreateWeapon(Vector2 position) =>
             CreateGameObject(AssetsPath.WeaponPath, position);
 
+        public GameObject CreateProjectile(Vector2 position) => 
+            CreateGameObject(AssetsPath.ProjectilePath, position);
+
         public GameObject CreateEnemy(Vector2 position) => 
-            CreateGameObject(AssetsPath.EnemyPath, position);
+            CreateGameObject(AssetsPath.FlyEnemyPath, position);
 
         public void CreateHole()
         {

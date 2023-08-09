@@ -3,7 +3,7 @@ using Sources.Infrastructure.DI;
 using Sources.Services.Input;
 using UnityEngine;
 
-namespace Sources.Behaviour
+namespace Sources.Behaviour.Weapon
 {
     public class WeaponAimer : MonoBehaviour
     {
@@ -12,23 +12,18 @@ namespace Sources.Behaviour
         private IInputSurvice _inputSurvice;
         private Camera _camera;
         private Vector2 _previousCursorPosition;
-
-        private void Awake()
-        {
-            _inputSurvice = AllServices.Container.Single<IInputSurvice>();
-        }
-
+        
         private void Start()
         {
+            GetInputService();
             _camera = Camera.main;
         }
 
-        private void Update()
-        {
-            Vector2 worldCursorPosition = GetWorldCursorPosition();
+        private void Update() => 
+            Aim();
 
-            _weapon.transform.LookAt2D(worldCursorPosition);
-        }
+        private void Aim() => 
+            _weapon.transform.LookAt2D(GetWorldCursorPosition());
 
         private Vector2 GetWorldCursorPosition()
         {
@@ -41,5 +36,8 @@ namespace Sources.Behaviour
 
             return worldCursorPosition;
         }
+
+        private void GetInputService() => 
+            _inputSurvice = AllServices.Container.Single<IInputSurvice>();
     }
 }
