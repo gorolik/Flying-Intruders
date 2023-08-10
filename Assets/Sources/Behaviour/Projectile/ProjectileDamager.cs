@@ -1,20 +1,10 @@
-﻿using UnityEngine;
+﻿using Sources.Behaviour.HealthSystem;
 
 namespace Sources.Behaviour.Projectile
 {
-    public class ProjectileDamager : MonoBehaviour
+    public class ProjectileDamager : Damager
     {
-        private float _damage;
-
-        public void Init(float damage)
-        {
-            _damage = damage;
-        }
-
-        public bool TryDamage(RaycastHit2D hit)
-        {
-            Debug.Log("Damaged: " + _damage);
-            return false;
-        }
+        public void Init(float damage) => 
+            Damage = damage;
     }
 }

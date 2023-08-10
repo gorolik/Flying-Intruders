@@ -20,6 +20,6 @@ namespace Sources.Behaviour.Projectile
             _mover.OnCollided -= OnCollided;
 
         private void OnCollided(RaycastHit2D hit) => 
-            _damager.TryDamage(hit);
+            _damager.TryDamage(hit.transform);
     }
 }

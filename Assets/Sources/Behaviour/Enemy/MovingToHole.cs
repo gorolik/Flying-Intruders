@@ -18,10 +18,8 @@ namespace Sources.Behaviour.Enemy
             InitHolePoint();
         }
 
-        private void Update()
-        {
+        private void Update() => 
             Move();
-        }
 
         private void Move()
         {
