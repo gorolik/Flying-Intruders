@@ -13,13 +13,15 @@ namespace Sources.Behaviour.Enemy
 
         private Animator _animator;
 
-        private void Start() => 
-            _animator = GetComponent<Animator>();
-
-        private void Update()
+        private void Start()
         {
-            _animator.SetFloat(SpeedHash, _moving.Speed);
+            _animator = GetComponent<Animator>();
+            
+            SetMoveSpeed();
         }
+
+        private void SetMoveSpeed() => 
+            _animator.SetFloat(SpeedHash, _moving.Speed);
 
         public void Die() => 
             _animator.SetTrigger(DieHash);

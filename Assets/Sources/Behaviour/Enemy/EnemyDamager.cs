@@ -17,7 +17,7 @@ namespace Sources.Behaviour.Enemy
 
         protected override float Damage => _damage;
 
-        public event Action GamageGived;
+        public Action DamageGived;
 
         private void Start()
         {
@@ -33,15 +33,16 @@ namespace Sources.Behaviour.Enemy
         {
             if (CanAttack())
             {
-                TryDamage(_hole);
-                
-                _damageGived = true;
-                GamageGived?.Invoke();
+                if (TryDamage(_hole))
+                {
+                    _damageGived = true;
+                    DamageGived?.Invoke();
+                }
             }
         }
 
         private bool CanAttack() => 
-            _hole && !_damageGived && Vector2.Distance(_hole.position, transform.position) <= _attackDistance;
+            _hole != null && !_damageGived && Vector2.Distance(_hole.position, transform.position) <= _attackDistance;
 
         private void GetGameFactory() => 
             _gameFactory = AllServices.Container.Single<IGameFactory>();

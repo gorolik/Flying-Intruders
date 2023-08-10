@@ -21,9 +21,12 @@ namespace Sources.Behaviour.Enemy
 
         private void TryDie(float healthValue)
         {
-            if(healthValue <= 0 && !_isDied)
+            if(ShouldDie(healthValue))
                 Die();
         }
+
+        private bool ShouldDie(float healthValue) => 
+            healthValue <= 0 && !_isDied;
 
         private void Die()
         {

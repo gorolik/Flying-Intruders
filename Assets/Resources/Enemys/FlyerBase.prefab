@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3136038957019321450}
   - component: {fileID: 1271355292777342239}
   - component: {fileID: 6993638376110309194}
+  - component: {fileID: 3563264122188018082}
   m_Layer: 6
   m_Name: FlyerBase
   m_TagString: Untagged
@@ -137,6 +138,22 @@ MonoBehaviour:
   _health: {fileID: 3136038957019321450}
   _animator: {fileID: 226585758823608362}
   _move: {fileID: 7345758859027224015}
+  _collider: {fileID: 3648455208204821253}
+--- !u!114 &3563264122188018082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2921160141073185057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0942a15c63924d44a8954e9a09d63e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damager: {fileID: 1271355292777342239}
+  _mover: {fileID: 7345758859027224015}
+  _animator: {fileID: 226585758823608362}
   _collider: {fileID: 3648455208204821253}
 --- !u!1 &3234640396040966879
 GameObject:
@@ -374,3 +391,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e688a3e03a871a4ba030624d35842c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moving: {fileID: 7345758859027224015}
