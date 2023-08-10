@@ -1,4 +1,5 @@
 ﻿using Sources.Behaviour;
+using Sources.Behaviour.UI;
 using Sources.Infrastructure.DI;
 
 namespace Sources.Infrastructure

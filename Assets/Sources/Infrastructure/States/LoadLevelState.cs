@@ -1,4 +1,5 @@
 ﻿using Sources.Behaviour;
+using Sources.Behaviour.UI;
 using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
 using UnityEngine;
@@ -53,8 +54,7 @@ namespace Sources.Infrastructure.States
 
         private void InitGameWorld()
         {
-            GameObject weapon =
-                _gameFactory.CreateWeapon(GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
+            _gameFactory.CreateWeapon(GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
             _gameFactory.CreateHole();
         }

@@ -3,7 +3,7 @@ using Sources.Infrastructure.PersistentProgress;
 using TMPro;
 using UnityEngine;
 
-namespace Sources.Behaviour
+namespace Sources.Behaviour.UI
 {
     public class BestScore : MonoBehaviour, ISavedProgressUpdater
     {

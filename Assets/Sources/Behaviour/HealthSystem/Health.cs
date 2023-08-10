@@ -7,26 +7,34 @@ namespace Sources.Behaviour.HealthSystem
     {
         [SerializeField] private float _maxValue = 50;
 
-        public float CurrentValue { get; set; }
+        private float _currentValue;
 
         public float MaxValue 
             => _maxValue;
 
+        public float CurrentValue
+        {
+            get => _currentValue;
+            set
+            {
+                float validatedValue = Mathf.Clamp(value, 0, _maxValue);
+                _currentValue = validatedValue;
+                
+                OnHealthChanged?.Invoke(CurrentValue);
+            }
+        }
+
         public event Action<float> OnHealthChanged;
 
-        private void Start()
-        {
+        private void Start() => 
             CurrentValue = MaxValue;
-        }
 
         public void TakeDamage(float value)
         {
             if (CurrentValue < 0)
                 throw new ArgumentOutOfRangeException(value.ToString());
 
-            CurrentValue = Mathf.Clamp(CurrentValue - value, 0, float.MaxValue);
-
-            OnHealthChanged?.Invoke(CurrentValue);
+            CurrentValue -= value;
         }
     }
 }

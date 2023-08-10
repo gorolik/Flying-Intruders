@@ -21,7 +21,7 @@ namespace Sources.Infrastructure.Factory
         public void CreateHud() =>
             CreateGameObject(AssetsPath.HudPath);
 
-        public GameObject CreateWeapon(Vector2 position) =>
+        public void CreateWeapon(Vector2 position) =>
             CreateGameObject(AssetsPath.WeaponPath, position);
 
         public GameObject CreateProjectile(Vector2 position) => 

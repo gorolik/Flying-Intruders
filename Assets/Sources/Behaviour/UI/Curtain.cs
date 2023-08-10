@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.Behaviour
+namespace Sources.Behaviour.UI
 {
     public class Curtain : MonoBehaviour
     {
