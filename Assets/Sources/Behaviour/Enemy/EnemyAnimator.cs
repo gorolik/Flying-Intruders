@@ -5,15 +5,20 @@ namespace Sources.Behaviour.Enemy
     [RequireComponent(typeof(Animator))]
     public class EnemyAnimator : MonoBehaviour
     {
+        [SerializeField] private MovingToHole _moving;
+        
         public static readonly int SpeedHash = Animator.StringToHash("Speed");
         public static readonly int DieHash = Animator.StringToHash("Die");
         public static readonly int FlewHash = Animator.StringToHash("Flew");
 
         private Animator _animator;
 
-        private void Start()
-        {
+        private void Start() => 
             _animator = GetComponent<Animator>();
+
+        private void Update()
+        {
+            _animator.SetFloat(SpeedHash, _moving.Speed);
         }
 
         public void Die() => 

@@ -11,6 +11,8 @@ namespace Sources.Behaviour.Enemy
 
         private Transform _hole;
         private IGameFactory _gameFactory;
+        
+        public float Speed => _speed;
 
         private void Start()
         {
