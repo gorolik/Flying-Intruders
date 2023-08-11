@@ -7,44 +7,25 @@ namespace Sources.Behaviour.Enemy
 {
     public class MovingToHole : MonoBehaviour
     {
-        [SerializeField] private float _speed;
-
+        private float _speed;
         private Transform _hole;
-        private IGameFactory _gameFactory;
         
         public float Speed => _speed;
 
-        private void Start()
-        {
-            GetGameFactory();
-            InitHolePoint();
-        }
+        public void Construct(Transform hole) =>
+            _hole = hole;
 
-        private void Update() => 
+        public void Init(float speed) =>
+            _speed = speed;
+
+        private void Update() =>
             Move();
 
         private void Move()
         {
-            if (_hole == null)
-                return;
-
             Vector3 direction = _hole.position - transform.position.normalized;
             transform.Translate(direction * (_speed * Time.deltaTime), Space.World);
             transform.LookAt2D(transform.position + direction);
         }
-
-        private void InitHolePoint()
-        {
-            if (_gameFactory.Hole != null)
-                GetHole();
-            else
-                _gameFactory.HoleCreated += GetHole;
-        }
-
-        private void GetGameFactory() => 
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-
-        private void GetHole() => 
-            _hole = _gameFactory.Hole;
     }
 }

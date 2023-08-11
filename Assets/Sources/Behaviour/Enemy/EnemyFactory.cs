@@ -1,12 +1,14 @@
 using System.Collections;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
+using Sources.StaticData;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
 {
     public class EnemyFactory : MonoBehaviour
     {
+        [SerializeField] private EnemyType _type;
         [SerializeField] private float _cooldown = 2;
         [SerializeField] private float _xOffset;
 
@@ -34,7 +36,7 @@ namespace Sources.Behaviour.Enemy
 
         private void SpawnEnemy()
         {
-            GameObject enemy = _gameFactory.CreateEnemy(GetRandomSpawnPoint());
+            GameObject enemy = _gameFactory.CreateEnemy(_type, transform, GetRandomSpawnPoint());
         }
 
         private Vector2 GetRandomSpawnPoint()

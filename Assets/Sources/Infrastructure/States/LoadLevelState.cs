@@ -54,9 +54,9 @@ namespace Sources.Infrastructure.States
 
         private void InitGameWorld()
         {
+            _gameFactory.CreateHole();
             _gameFactory.CreateWeapon(GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
-            _gameFactory.CreateHole();
         }
     }
 }

@@ -3,32 +3,30 @@ using Sources.Behaviour.HealthSystem;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Behaviour.Enemy
 {
     public class EnemyDamager : Damager
     {
-        [SerializeField] private float _attackDistance;
-        [SerializeField] private float _damage;
-
+        private float _damageDistance;
+        private float _damage;
         private Transform _hole;
-        private IGameFactory _gameFactory;
         private bool _damageGived;
 
         protected override float Damage => _damage;
 
         public Action DamageGived;
 
-        private void Start()
+        public void Construct(Transform hole) => 
+            _hole = hole;
+
+        public void Init(float damage, float damageDistance)
         {
-            GetGameFactory();
-
-            if (_gameFactory.Hole != null)
-                GetHole();
-            else
-                _gameFactory.HoleCreated += GetHole;
+            _damage = damage;
+            _damageDistance = damageDistance;
         }
-
+        
         private void FixedUpdate()
         {
             if (CanAttack())
@@ -42,12 +40,6 @@ namespace Sources.Behaviour.Enemy
         }
 
         private bool CanAttack() => 
-            _hole != null && !_damageGived && Vector2.Distance(_hole.position, transform.position) <= _attackDistance;
-
-        private void GetGameFactory() => 
-            _gameFactory = AllServices.Container.Single<IGameFactory>();
-
-        private void GetHole() => 
-            _hole = _gameFactory.Hole;
+            _hole != null && !_damageGived && Vector2.Distance(_hole.position, transform.position) <= _damageDistance;
     }
 }

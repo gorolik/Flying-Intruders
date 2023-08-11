@@ -5,12 +5,20 @@ namespace Sources.Behaviour.HealthSystem
 {
     public class Health : MonoBehaviour, IHealth
     {
-        [SerializeField] private float _maxValue = 50;
-
+        private float _maxValue;
         private float _currentValue;
 
-        public float MaxValue 
-            => _maxValue;
+        public float MaxValue
+        {
+            get => _maxValue;
+            set
+            {
+                _maxValue = value;
+                
+                if (CurrentValue > value)
+                    CurrentValue = value;
+            }
+        }
 
         public float CurrentValue
         {
@@ -25,6 +33,12 @@ namespace Sources.Behaviour.HealthSystem
         }
 
         public event Action<float> OnHealthChanged;
+
+        public void Init(float health)
+        {
+            MaxValue = health;
+            CurrentValue = health;
+        }
 
         private void Start() => 
             CurrentValue = MaxValue;

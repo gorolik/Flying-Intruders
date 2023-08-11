@@ -3,6 +3,7 @@ using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Input;
+using Sources.Services.StaticData;
 using UnityEngine;
 
 namespace Sources.Infrastructure.States
@@ -27,22 +28,18 @@ namespace Sources.Infrastructure.States
         public void Enter() => 
             _sceneLoader.Load(_initialScene, EnterLoadLevel);
 
-        public void Exit()
-        {
+        public void Exit() {}
 
-        }
-
-        private void EnterLoadLevel()
-        {
+        private void EnterLoadLevel() => 
             _gameStateMachine.Enter<LoadProgressState>();
-        }
 
         private void RegisterServices()
         {
+            RegisterStaticDataService();
             _services.RegisterSingle<IInputSurvice>(GetInputService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>(), _services.Single<IStaticDataService>()));
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
         }
 
@@ -52,6 +49,13 @@ namespace Sources.Infrastructure.States
                 return new StandaloneInputService();
             else
                 return new MobileInputService();
+        }
+
+        private void RegisterStaticDataService()
+        {
+            IStaticDataService staticDataService = new StaticDataService();
+            staticDataService.LoadEnemysData();
+            _services.RegisterSingle<IStaticDataService>(staticDataService);
         }
     }
 }
