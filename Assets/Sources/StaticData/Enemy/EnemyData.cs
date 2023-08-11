@@ -17,15 +17,18 @@ namespace Sources.StaticData.Enemy
 
         
         [Header("Movement")]
-        [Range(0.1f, 30)] [SerializeField] private float _speed = 20;
+        [Range(0.1f, 10)] [SerializeField] private float _speed = 2;
 
         [SerializeField] private MoveType _moveType;
 
         [Header("Resources")]
         [SerializeField] private GameObject _prefab;
 
+        [Header("Other")]
+        [SerializeField] private int _score = 1;
+
         public EnemyType Type => _type;
-        
+
         public float Health => _health;
         
         public float Damage => _damage;
@@ -35,5 +38,7 @@ namespace Sources.StaticData.Enemy
         public MoveType MoveType => _moveType;
         
         public GameObject Prefab => _prefab;
+
+        public int Score => _score;
     }
 }

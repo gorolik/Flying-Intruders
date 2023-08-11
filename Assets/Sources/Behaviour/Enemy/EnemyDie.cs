@@ -1,4 +1,6 @@
-﻿using Sources.Behaviour.HealthSystem;
+﻿using System;
+using Sources.Behaviour.HealthSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
@@ -13,6 +15,8 @@ namespace Sources.Behaviour.Enemy
         private const float _destroyDelay = 5;
         
         private bool _isDied;
+
+        public event Action OnDie;
 
         private void OnEnable()
         {
@@ -34,6 +38,8 @@ namespace Sources.Behaviour.Enemy
 
             _move.enabled = false;
             _collider.enabled = false;
+            
+            OnDie?.Invoke();
             
             _animator.Die();
             Destroy(gameObject, _destroyDelay);

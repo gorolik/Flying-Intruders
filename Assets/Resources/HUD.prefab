@@ -528,6 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9056a04ed966abb49bf3c91731603fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _score: {fileID: 491729414403302410}
   _display: {fileID: 7704481113902528050}
   _displayPrefix: 'Best score: '
 --- !u!1 &3237000957494491793
@@ -1621,6 +1622,7 @@ GameObject:
   - component: {fileID: 2633847050500309877}
   - component: {fileID: 5028095172852029451}
   - component: {fileID: 4332385190426035773}
+  - component: {fileID: 491729414403302410}
   m_Layer: 5
   m_Name: CurrentScore
   m_TagString: Untagged
@@ -1745,3 +1747,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &491729414403302410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8189580433400586986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8aa529d61792546b42c9cfab861220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _display: {fileID: 4332385190426035773}
+  _prefix: 'Score: '

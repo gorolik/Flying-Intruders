@@ -59,6 +59,9 @@ namespace Sources.Infrastructure.Factory
             Health health = enemy.GetComponent<Health>();
             health.Init(enemyData.Health);
 
+            ScoreCollector scoreCollector = enemy.GetComponentInChildren<ScoreCollector>();
+            scoreCollector.Init(enemyData.Score);
+            
             return enemy;
         }
 

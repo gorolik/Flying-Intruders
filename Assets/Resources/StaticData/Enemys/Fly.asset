@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb4384c3c3ccb145a66ea0ccbdb85ff, type: 3}
   m_Name: Fly
   m_EditorClassIdentifier: 
+  _type: 0
   _health: 20
   _damage: 1
-  _speed: 20
+  _damageDistance: 0.3
+  _speed: 8
   _moveType: 0
   _prefab: {fileID: 8143955117194714953, guid: 1150e469bf4a99c4db5d403d612c682d, type: 3}
+  _score: 1

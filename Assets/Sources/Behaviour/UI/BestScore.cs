@@ -7,6 +7,7 @@ namespace Sources.Behaviour.UI
 {
     public class BestScore : MonoBehaviour, ISavedProgressUpdater
     {
+        [SerializeField] private Score _score;
         [SerializeField] private TMP_Text _display;
         [SerializeField] private string _displayPrefix = "Best score: ";
 
@@ -17,7 +18,13 @@ namespace Sources.Behaviour.UI
         {
             _progressService = AllServices.Container.Single<ISaveLoadService>();
         }
-        
+
+        private void OnEnable() => 
+            _score.ValueChanged += OnScoreChanged;
+
+        private void OnDisable() => 
+            _score.ValueChanged -= OnScoreChanged;
+
         private void OnScoreChanged(int score)
         {
             if (score > _value)
