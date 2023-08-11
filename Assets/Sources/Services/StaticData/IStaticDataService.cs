@@ -1,5 +1,4 @@
 ﻿using Sources.Infrastructure.DI;
-using Sources.StaticData;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
 

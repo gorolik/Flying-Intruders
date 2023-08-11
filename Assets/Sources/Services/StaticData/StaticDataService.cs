@@ -8,17 +8,14 @@ namespace Sources.Services.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
+        private HoleData _holeData;
         private Dictionary<EnemyType, EnemyData> _enemys;
 
-        public void LoadHoleData()
-        {
-            
-        }
+        public void LoadHoleData() => 
+            _holeData = Resources.Load<HoleData>("StaticData/Hole/Hole");
 
-        public HoleData GetHoleData()
-        {
-            throw new System.NotImplementedException();
-        }
+        public HoleData GetHoleData() => 
+            _holeData;
 
         public void LoadEnemysData()
         {

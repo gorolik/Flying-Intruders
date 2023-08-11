@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sources.Behaviour.Enemy;
 using Sources.Behaviour.HealthSystem;
 using Sources.Behaviour.UI;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.StaticData;
-using Sources.StaticData;
 using Sources.StaticData.Enemy;
+using Sources.StaticData.Hole;
 using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -19,13 +18,11 @@ namespace Sources.Infrastructure.Factory
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
 
-        private Transform _hole;
+        private GameObject _hole;
         
         public List<ISavedProgressReader> SavedProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgressUpdater> SavedProgressUpdaters { get; } = new List<ISavedProgressUpdater>();
         
-        public event Action HoleCreated;
-
         public GameFactory(IAssets assetProvider, IStaticDataService staticData)
         {
             _assets = assetProvider;
@@ -49,11 +46,11 @@ namespace Sources.Infrastructure.Factory
             GameObject enemy = Object.Instantiate(enemyData.Prefab, position, quaternion.identity, parent);
 
             MovingToHole mover = enemy.GetComponent<MovingToHole>();
-            mover.Construct(_hole);
+            mover.Construct(_hole.transform);
             mover.Init(enemyData.Speed);
 
             EnemyDamager damager = enemy.GetComponent<EnemyDamager>();
-            damager.Construct(_hole);
+            damager.Construct(_hole.transform);
             damager.Init(enemyData.Damage, enemyData.DamageDistance);
 
             Health health = enemy.GetComponent<Health>();
@@ -70,8 +67,12 @@ namespace Sources.Infrastructure.Factory
 
         public void CreateHole()
         {
-            _hole = CreateGameObject(AssetsPath.HolePath, Vector2.zero).transform;
-            HoleCreated?.Invoke();
+            HoleData holeData = _staticData.GetHoleData();
+            
+            _hole = CreateGameObject(AssetsPath.HolePath, Vector2.zero);
+
+            Health health = _hole.GetComponent<Health>();
+            health.Init(holeData.Health);
         }
 
         public void CleanUp()
