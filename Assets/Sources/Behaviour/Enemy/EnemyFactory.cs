@@ -2,6 +2,7 @@ using System.Collections;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using Sources.StaticData;
+using Sources.StaticData.Enemy;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy

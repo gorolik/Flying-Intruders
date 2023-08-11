@@ -7,6 +7,7 @@ using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.StaticData;
 using Sources.StaticData;
+using Sources.StaticData.Enemy;
 using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;

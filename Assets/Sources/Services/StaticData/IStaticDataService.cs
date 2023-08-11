@@ -1,5 +1,6 @@
 ﻿using Sources.Infrastructure.DI;
 using Sources.StaticData;
+using Sources.StaticData.Enemy;
 
 namespace Sources.Services.StaticData
 {

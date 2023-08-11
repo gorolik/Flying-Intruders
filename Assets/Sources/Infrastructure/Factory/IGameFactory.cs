@@ -2,6 +2,7 @@
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.StaticData;
+using Sources.StaticData.Enemy;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Factory
