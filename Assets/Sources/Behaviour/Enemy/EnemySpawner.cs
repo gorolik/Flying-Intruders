@@ -1,6 +1,7 @@
 using System.Collections;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
+using Sources.Services.Difficult;
 using Sources.StaticData.Enemy;
 using UnityEngine;
 
@@ -10,16 +11,21 @@ namespace Sources.Behaviour.Enemy
     {
         private const float _xOffset = 1.5f;
 
+        private float _startTime;
         private IGameFactory _gameFactory;
         private Camera _camera;
         private Vector2 _screenSize;
-        private float _cooldown;
+        private IDifficultService _difficultService;
+        private float _startSpawnCooldown;
 
         public void Construct(IGameFactory gameFactory) =>
             _gameFactory = gameFactory;
 
-        public void Init(float spawnCooldown) => 
-            _cooldown = spawnCooldown;
+        public void Init(IDifficultService difficultService, float startSpawnCooldown)
+        {
+            _difficultService = difficultService;
+            _startSpawnCooldown = startSpawnCooldown;
+        }
 
         private void Start()
         {
@@ -31,13 +37,23 @@ namespace Sources.Behaviour.Enemy
 
         private IEnumerator EnemySpawnCycle()
         {
+            _startTime = Time.time;
+            
             while (true)
             {
-                yield return new WaitForSeconds(_cooldown);
+                float difficultValue = GetDifficultValue();
+                
+                yield return new WaitForSeconds(_startSpawnCooldown / difficultValue);
                 
                 SpawnEnemy();
             }
         }
+
+        private float GetDifficultValue() => 
+            _difficultService.GetDifficult(GetPlayTime());
+
+        private float GetPlayTime() => 
+            Time.time - _startTime;
 
         private void SpawnEnemy() => 
             _gameFactory.CreateEnemy(EnemyType.Fly, transform, GetRandomSpawnPoint());

@@ -2,6 +2,7 @@
 using Sources.Behaviour.Projectile;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.Services.Difficult;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Weapon;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace Sources.Infrastructure.Factory
         void CreateWeapon(WeaponType type, Vector2 position);
         void CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection);
         void CreateEnemy(EnemyType type, Transform parent, Vector2 position);
-        void CreateEnemySpawner(float spawnCooldown);
+        void CreateEnemySpawner(IDifficultService difficult);
         void CleanUp();
     }
 }

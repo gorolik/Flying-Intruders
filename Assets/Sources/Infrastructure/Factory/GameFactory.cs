@@ -6,8 +6,10 @@ using Sources.Behaviour.UI;
 using Sources.Behaviour.Weapon;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.Services.Difficult;
 using Sources.Services.Input;
 using Sources.Services.StaticData;
+using Sources.StaticData.Difficult;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
 using Sources.StaticData.Weapon;
@@ -99,13 +101,14 @@ namespace Sources.Infrastructure.Factory
             scoreCollector.Init(enemyData.Score);
         }
 
-        public void CreateEnemySpawner(float spawnCooldown)
+        public void CreateEnemySpawner(IDifficultService difficult)
         {
+            DifficultData difficultData = _staticData.GetDifficultData();
             GameObject spawnerObject = CreateGameObject(AssetsPath.EnemySpawnerPath);
 
             EnemySpawner spawner = spawnerObject.GetComponent<EnemySpawner>();
             spawner.Construct(this);
-            spawner.Init(spawnCooldown);
+            spawner.Init(difficult, difficultData.StartEnemySpawnCooldown);
         }
 
         public void CleanUp()

@@ -2,6 +2,7 @@
 using Sources.Behaviour.UI;
 using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.Services.Difficult;
 using Sources.StaticData.Weapon;
 using UnityEngine;
 
@@ -11,21 +12,22 @@ namespace Sources.Infrastructure.States
     {
         private const string _weaponSpawnPointTag = "SpawnPoint";
         private const WeaponType _startWeaponType = WeaponType.Crossbow;
-        private const float _enemySpawnCooldown = 2;
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
         private readonly Curtain _curtain;
+        private readonly IDifficultService _difficultService;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService, IDifficultService difficultService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _difficultService = difficultService;
         }
 
         public void Enter(string sceneName)
@@ -58,7 +60,7 @@ namespace Sources.Infrastructure.States
             _gameFactory.CreateHole();
             _gameFactory.CreateWeapon(_startWeaponType, GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
-            _gameFactory.CreateEnemySpawner(_enemySpawnCooldown);
+            _gameFactory.CreateEnemySpawner(_difficultService);
         }
     }
 }
