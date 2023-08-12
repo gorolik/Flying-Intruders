@@ -11,6 +11,7 @@ namespace Sources.Infrastructure.States
     {
         private const string _weaponSpawnPointTag = "SpawnPoint";
         private const WeaponType _startWeaponType = WeaponType.Crossbow;
+        private const float _enemySpawnCooldown = 2;
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -59,6 +60,7 @@ namespace Sources.Infrastructure.States
             _gameFactory.CreateHole();
             _gameFactory.CreateWeapon(_startWeaponType, GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
+            _gameFactory.CreateEnemySpawner(_enemySpawnCooldown);
         }
     }
 }

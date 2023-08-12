@@ -16,8 +16,9 @@ namespace Sources.Infrastructure.Factory
         void CreateHole();
         void CreateHud();
         void CreateWeapon(WeaponType type, Vector2 position);
-        GameObject CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection);
-        GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position);
+        void CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection);
+        void CreateEnemy(EnemyType type, Transform parent, Vector2 position);
+        void CreateEnemySpawner(float spawnCooldown);
         void CleanUp();
     }
 }

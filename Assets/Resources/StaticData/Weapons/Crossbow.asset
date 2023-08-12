@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   _projectileProperties:
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 8830741472534025304, guid: cefbf0989e7104849b0e6b3899a27215, type: 3}
     Speed: 16
     Damage: 20
   _cooldown: 1.6

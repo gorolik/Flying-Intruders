@@ -4,6 +4,6 @@
     {
         public const string HudPath = "HUD";
         public const string HolePath = "HolePoint";
-        public const string ProjectilePath = "Projectile";
+        public const string EnemySpawnerPath = "EnemySpawner";
     }
 }

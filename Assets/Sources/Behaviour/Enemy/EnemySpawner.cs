@@ -1,21 +1,25 @@
 using System.Collections;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
-using Sources.StaticData;
 using Sources.StaticData.Enemy;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
 {
-    public class EnemyFactory : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private EnemyType _type;
-        [SerializeField] private float _cooldown = 2;
-        [SerializeField] private float _xOffset;
+        private const float _xOffset = 1.5f;
 
         private IGameFactory _gameFactory;
         private Camera _camera;
         private Vector2 _screenSize;
+        private float _cooldown;
+
+        public void Construct(IGameFactory gameFactory) =>
+            _gameFactory = gameFactory;
+
+        public void Init(float spawnCooldown) => 
+            _cooldown = spawnCooldown;
 
         private void Start()
         {
@@ -35,10 +39,8 @@ namespace Sources.Behaviour.Enemy
             }
         }
 
-        private void SpawnEnemy()
-        {
-            GameObject enemy = _gameFactory.CreateEnemy(_type, transform, GetRandomSpawnPoint());
-        }
+        private void SpawnEnemy() => 
+            _gameFactory.CreateEnemy(EnemyType.Fly, transform, GetRandomSpawnPoint());
 
         private Vector2 GetRandomSpawnPoint()
         {

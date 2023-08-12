@@ -66,7 +66,7 @@ namespace Sources.Infrastructure.Factory
             shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown);
         }
 
-        public GameObject CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection)
+        public void CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection)
         {
             GameObject projectile = CreateGameObject(properties.Prefab, position);
 
@@ -75,14 +75,14 @@ namespace Sources.Infrastructure.Factory
             
             ProjectileDamager damager = projectile.GetComponent<ProjectileDamager>();
             damager.Init(properties.Damage);
-            
-            return projectile;
         }
 
-        public GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position)
+        public void CreateEnemy(EnemyType type, Transform parent, Vector2 position)
         {
             EnemyData enemyData = _staticData.GetEnemyDataByType(type);
-            GameObject enemy = Object.Instantiate(enemyData.Prefab, position, quaternion.identity, parent);
+            
+            GameObject enemy = CreateGameObject(enemyData.Prefab, position);
+            enemy.transform.parent = parent;
 
             MovingToHole mover = enemy.GetComponent<MovingToHole>();
             mover.Construct(_hole.transform);
@@ -97,8 +97,15 @@ namespace Sources.Infrastructure.Factory
 
             ScoreCollector scoreCollector = enemy.GetComponentInChildren<ScoreCollector>();
             scoreCollector.Init(enemyData.Score);
-            
-            return enemy;
+        }
+
+        public void CreateEnemySpawner(float spawnCooldown)
+        {
+            GameObject spawnerObject = CreateGameObject(AssetsPath.EnemySpawnerPath);
+
+            EnemySpawner spawner = spawnerObject.GetComponent<EnemySpawner>();
+            spawner.Construct(this);
+            spawner.Init(spawnCooldown);
         }
 
         public void CleanUp()
