@@ -36,10 +36,8 @@ namespace Sources.Infrastructure.States
             _sceneLoader.Load(sceneName, OnLevelLoaded);
         }
 
-        public void Exit()
-        {
+        public void Exit() => 
             _curtain.Hide();
-        }
 
         private void OnLevelLoaded()
         {

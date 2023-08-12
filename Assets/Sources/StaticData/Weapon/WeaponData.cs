@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Sources.StaticData.Weapon
 {
-    [CreateAssetMenu(fileName = "WeaponData", menuName = "Static Data/Weapon Data", order = 0)]
+    [CreateAssetMenu(fileName = "WeaponData", menuName = "Static Data/Weapon Data")]
     public class WeaponData : ScriptableObject
     {
         [SerializeField] private WeaponType _type;
