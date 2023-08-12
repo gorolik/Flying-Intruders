@@ -1,5 +1,5 @@
 ﻿using Sources.Behaviour.Projectile;
-using Sources.Infrastructure.DI;
+using Sources.Infrastructure.Factory;
 using Sources.Services.Input;
 using UnityEngine;
 
@@ -7,23 +7,26 @@ namespace Sources.Behaviour.Weapon
 {
     public class WeaponShooter : MonoBehaviour
     {
-        [SerializeField] private ProjectileFactory _projectileFactory;
         [SerializeField] private Transform _muzzlePoint;
 
         private ProjectileProperties _projectileProperties;
         private IInputSurvice _inputSurvice;
+        private IGameFactory _gameFactory;
         private float _cooldown;
         private float _currentCooldown;
+
+        public void Construct(IGameFactory gameFactory, IInputSurvice inputSurvice)
+        {
+            _gameFactory = gameFactory;
+            _inputSurvice = inputSurvice;
+        }
 
         public void Init(ProjectileProperties properties, float cooldown)
         {
             _projectileProperties = properties;
             _cooldown = cooldown;
         }
-
-        private void Start() => 
-            GetInputService();
-
+        
         private void Update()
         {
             if (!IsCooldownUp())
@@ -41,15 +44,12 @@ namespace Sources.Behaviour.Weapon
         }
 
         private void CreateProjectile() => 
-            _projectileFactory.CreateProjectile(_projectileProperties, _muzzlePoint.position, _muzzlePoint.up);
+            _gameFactory.CreateProjectile(_projectileProperties, _muzzlePoint.position, _muzzlePoint.up);
 
         private bool CanShoot() => 
             _inputSurvice.IsClicked && IsCooldownUp();
 
         private bool IsCooldownUp() => 
             _currentCooldown <= 0;
-
-        private void GetInputService() => 
-            _inputSurvice = AllServices.Container.Single<IInputSurvice>();
     }
 }

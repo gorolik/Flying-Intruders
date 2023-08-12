@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using Sources.Behaviour.Enemy;
 using Sources.Behaviour.HealthSystem;
+using Sources.Behaviour.Projectile;
 using Sources.Behaviour.UI;
 using Sources.Behaviour.Weapon;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.Services.Input;
 using Sources.Services.StaticData;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
@@ -19,16 +21,18 @@ namespace Sources.Infrastructure.Factory
     {
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
+        private readonly IInputSurvice _inputSurvice;
 
         private GameObject _hole;
         
         public List<ISavedProgressReader> SavedProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgressUpdater> SavedProgressUpdaters { get; } = new List<ISavedProgressUpdater>();
         
-        public GameFactory(IAssets assetProvider, IStaticDataService staticData)
+        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice)
         {
             _assets = assetProvider;
             _staticData = staticData;
+            _inputSurvice = inputSurvice;
         }
 
         public void CreateHole()
@@ -54,12 +58,26 @@ namespace Sources.Infrastructure.Factory
             WeaponData weaponData = _staticData.GetWeaponDataByType(type);
             GameObject weapon = CreateGameObject(weaponData.Prefab, position);
 
+            WeaponAimer aimer = weapon.GetComponent<WeaponAimer>();
+            aimer.Construct(_inputSurvice);
+            
             WeaponShooter shooter = weapon.GetComponent<WeaponShooter>();
+            shooter.Construct(this, _inputSurvice);
             shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown);
         }
 
-        public GameObject CreateProjectile(Vector2 position) => 
-            CreateGameObject(AssetsPath.ProjectilePath, position);
+        public GameObject CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection)
+        {
+            GameObject projectile = CreateGameObject(properties.Prefab, position);
+
+            ProjectileMover mover = projectile.GetComponent<ProjectileMover>();
+            mover.Init(startDirection, properties.Speed);
+            
+            ProjectileDamager damager = projectile.GetComponent<ProjectileDamager>();
+            damager.Init(properties.Damage);
+            
+            return projectile;
+        }
 
         public GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position)
         {

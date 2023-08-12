@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sources.Behaviour.Projectile;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.StaticData.Enemy;
@@ -15,7 +16,7 @@ namespace Sources.Infrastructure.Factory
         void CreateHole();
         void CreateHud();
         void CreateWeapon(WeaponType type, Vector2 position);
-        GameObject CreateProjectile(Vector2 muzzlePointPosition);
+        GameObject CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection);
         GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position);
         void CleanUp();
     }

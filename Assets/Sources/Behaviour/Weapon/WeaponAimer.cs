@@ -1,5 +1,4 @@
 using Sources.Behaviour.Extensions;
-using Sources.Infrastructure.DI;
 using Sources.Services.Input;
 using UnityEngine;
 
@@ -12,12 +11,12 @@ namespace Sources.Behaviour.Weapon
         private IInputSurvice _inputSurvice;
         private Camera _camera;
         private Vector2 _previousCursorPosition;
-        
-        private void Start()
-        {
-            GetInputService();
+
+        public void Construct(IInputSurvice inputSurvice) => 
+            _inputSurvice = inputSurvice;
+
+        private void Start() => 
             _camera = Camera.main;
-        }
 
         private void Update() => 
             Aim();
@@ -36,8 +35,5 @@ namespace Sources.Behaviour.Weapon
 
             return worldCursorPosition;
         }
-
-        private void GetInputService() => 
-            _inputSurvice = AllServices.Container.Single<IInputSurvice>();
     }
 }
