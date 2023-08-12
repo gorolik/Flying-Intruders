@@ -14,10 +14,8 @@ namespace Sources.Behaviour.UI
         private ISaveLoadService _progressService;
         private int _value;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _progressService = AllServices.Container.Single<ISaveLoadService>();
-        }
 
         private void OnEnable() => 
             _score.ValueChanged += OnScoreChanged;
@@ -42,14 +40,10 @@ namespace Sources.Behaviour.UI
             DisplayValue();
         }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
+        public void UpdateProgress(PlayerProgress progress) => 
             progress.BestScore = _value;
-        }
 
-        private string DisplayValue()
-        {
-            return _display.text = _displayPrefix + _value.ToString();
-        }
+        private void DisplayValue() => 
+            _display.text = _displayPrefix + _value.ToString();
     }
 }

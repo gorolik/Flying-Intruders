@@ -1,14 +1,15 @@
 ﻿using Sources.Infrastructure.DI;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
+using Sources.StaticData.Weapon;
 
 namespace Sources.Services.StaticData
 {
     public interface IStaticDataService : IService
     {
-        void LoadHoleData();
+        void LoadData();
         HoleData GetHoleData();
-        void LoadEnemysData();
         EnemyData GetEnemyDataByType(EnemyType type);
+        WeaponData GetWeaponDataByType(WeaponType type);
     }
 }

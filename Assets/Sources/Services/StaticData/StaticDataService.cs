@@ -2,6 +2,7 @@
 using System.Linq;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
+using Sources.StaticData.Weapon;
 using UnityEngine;
 
 namespace Sources.Services.StaticData
@@ -10,21 +11,39 @@ namespace Sources.Services.StaticData
     {
         private HoleData _holeData;
         private Dictionary<EnemyType, EnemyData> _enemys;
-
-        public void LoadHoleData() => 
-            _holeData = Resources.Load<HoleData>("StaticData/Hole/Hole");
+        private Dictionary<WeaponType, WeaponData> _weapons;
+        
+        public void LoadData()
+        {
+            LoadHoleData();
+            LoadEnemysData();
+            LoadWeaponData();
+        }
 
         public HoleData GetHoleData() => 
             _holeData;
 
-        public void LoadEnemysData()
+        public EnemyData GetEnemyDataByType(EnemyType type) => 
+            _enemys.TryGetValue(type, out EnemyData data) ? data : null;
+
+        public WeaponData GetWeaponDataByType(WeaponType type) => 
+            _weapons.TryGetValue(type, out WeaponData data) ? data : null;
+
+        private void LoadHoleData() => 
+            _holeData = Resources.Load<HoleData>("StaticData/Hole/Hole");
+
+        private void LoadEnemysData()
         {
             _enemys = Resources
                 .LoadAll<EnemyData>("StaticData/Enemys")
                 .ToDictionary(x => x.Type, x => x);
         }
 
-        public EnemyData GetEnemyDataByType(EnemyType type) => 
-            _enemys.TryGetValue(type, out EnemyData data) ? data : null;
+        private void LoadWeaponData()
+        {
+            _weapons = Resources
+                .LoadAll<WeaponData>("StaticData/Weapons")
+                .ToDictionary(x => x.Type, x => x);
+        }
     }
 }

@@ -7,14 +7,20 @@ namespace Sources.Behaviour.Weapon
 {
     public class WeaponShooter : MonoBehaviour
     {
-        [SerializeField] private float _cooldown = 1;
         [SerializeField] private ProjectileFactory _projectileFactory;
         [SerializeField] private Transform _muzzlePoint;
-        [SerializeField] private ProjectileProperties _projectileProperties;
 
+        private ProjectileProperties _projectileProperties;
         private IInputSurvice _inputSurvice;
+        private float _cooldown;
         private float _currentCooldown;
-        
+
+        public void Init(ProjectileProperties properties, float cooldown)
+        {
+            _projectileProperties = properties;
+            _cooldown = cooldown;
+        }
+
         private void Start() => 
             GetInputService();
 

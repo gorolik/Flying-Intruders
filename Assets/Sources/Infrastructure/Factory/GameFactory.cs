@@ -2,11 +2,13 @@
 using Sources.Behaviour.Enemy;
 using Sources.Behaviour.HealthSystem;
 using Sources.Behaviour.UI;
+using Sources.Behaviour.Weapon;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.StaticData;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
+using Sources.StaticData.Weapon;
 using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -29,6 +31,16 @@ namespace Sources.Infrastructure.Factory
             _staticData = staticData;
         }
 
+        public void CreateHole()
+        {
+            HoleData holeData = _staticData.GetHoleData();
+            
+            _hole = CreateGameObject(AssetsPath.HolePath, Vector2.zero);
+
+            Health health = _hole.GetComponent<Health>();
+            health.Init(holeData.Health);
+        }
+
         public void CreateHud()
         {
             GameObject hud = CreateGameObject(AssetsPath.HudPath);
@@ -37,8 +49,17 @@ namespace Sources.Infrastructure.Factory
             playerHealthUIView.Construct(_hole.GetComponent<IHealth>());
         }
 
-        public void CreateWeapon(Vector2 position) =>
-            CreateGameObject(AssetsPath.WeaponPath, position);
+        public void CreateWeapon(WeaponType type, Vector2 position)
+        {
+            WeaponData weaponData = _staticData.GetWeaponDataByType(type);
+            GameObject weapon = CreateGameObject(weaponData.Prefab, position);
+
+            WeaponShooter shooter = weapon.GetComponent<WeaponShooter>();
+            shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown);
+        }
+
+        public GameObject CreateProjectile(Vector2 position) => 
+            CreateGameObject(AssetsPath.ProjectilePath, position);
 
         public GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position)
         {
@@ -62,32 +83,22 @@ namespace Sources.Infrastructure.Factory
             return enemy;
         }
 
-        public GameObject CreateProjectile(Vector2 position) => 
-            CreateGameObject(AssetsPath.ProjectilePath, position);
-
-        public void CreateHole()
-        {
-            HoleData holeData = _staticData.GetHoleData();
-            
-            _hole = CreateGameObject(AssetsPath.HolePath, Vector2.zero);
-
-            Health health = _hole.GetComponent<Health>();
-            health.Init(holeData.Health);
-        }
-
         public void CleanUp()
         {
             SavedProgressReaders.Clear();
             SavedProgressUpdaters.Clear();
         }
         
-        private GameObject CreateGameObject(string path, Vector2 position)
+        private GameObject CreateGameObject(GameObject prefab, Vector2 position)
         {
-            GameObject gameObject = _assets.Instantiate(path, position); 
+            GameObject gameObject = _assets.Instantiate(prefab, position); 
             RegisterObject(gameObject);
             
             return gameObject;
-        }
+        }        
+        
+        private GameObject CreateGameObject(string path, Vector2 position) => 
+            CreateGameObject(_assets.GetPrefabByPath(path), position);
 
         private GameObject CreateGameObject(string path) 
             => CreateGameObject(path, Vector2.zero);

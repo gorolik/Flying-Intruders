@@ -2,6 +2,7 @@
 using Sources.Behaviour.UI;
 using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.StaticData.Weapon;
 using UnityEngine;
 
 namespace Sources.Infrastructure.States
@@ -9,6 +10,7 @@ namespace Sources.Infrastructure.States
     internal class LoadLevelState : IPayloadState<string>
     {
         private const string _weaponSpawnPointTag = "SpawnPoint";
+        private const WeaponType _startWeaponType = WeaponType.Crossbow;
 
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -55,7 +57,7 @@ namespace Sources.Infrastructure.States
         private void InitGameWorld()
         {
             _gameFactory.CreateHole();
-            _gameFactory.CreateWeapon(GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
+            _gameFactory.CreateWeapon(_startWeaponType, GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
         }
     }

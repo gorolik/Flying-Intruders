@@ -5,7 +5,8 @@ namespace Sources.Infrastructure.AssetManagement
 {
     public interface IAssets : IService
     {
-        GameObject Instantiate(string path);
+        GameObject Instantiate(GameObject prefab, Vector3 position);
         GameObject Instantiate(string path, Vector3 position);
+        GameObject GetPrefabByPath(string path);
     }
 }

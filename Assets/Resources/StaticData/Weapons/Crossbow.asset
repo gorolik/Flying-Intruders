@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b83edfef37d16cc4b8c686c1fbeb6cc1, type: 3}
+  m_Name: Crossbow
+  m_EditorClassIdentifier: 
+  _type: 0
+  _projectileProperties:
+    Prefab: {fileID: 0}
+    Speed: 16
+    Damage: 20
+  _cooldown: 1.6
+  _prefab: {fileID: 3559164276696282819, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}

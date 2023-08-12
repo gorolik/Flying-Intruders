@@ -54,8 +54,7 @@ namespace Sources.Infrastructure.States
         private void RegisterStaticDataService()
         {
             IStaticDataService staticDataService = new StaticDataService();
-            staticDataService.LoadHoleData();
-            staticDataService.LoadEnemysData();
+            staticDataService.LoadData();
             _services.RegisterSingle<IStaticDataService>(staticDataService);
         }
     }
