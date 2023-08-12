@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Infrastructure.DI;
 using UnityEngine;
 
 namespace Sources.Behaviour.Projectile
