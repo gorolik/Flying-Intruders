@@ -4,6 +4,7 @@ using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Difficult;
 using Sources.StaticData.Weapon;
+using Sources.UI.Factory;
 using UnityEngine;
 
 namespace Sources.Infrastructure.States
@@ -19,8 +20,9 @@ namespace Sources.Infrastructure.States
         private readonly IPersistentProgressService _progressService;
         private readonly Curtain _curtain;
         private readonly IDifficultService _difficultService;
+        private readonly IUIFactory _uiFactory;
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService, IDifficultService difficultService)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, Curtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService, IDifficultService difficultService, IUIFactory uiFactory)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
@@ -28,6 +30,7 @@ namespace Sources.Infrastructure.States
             _gameFactory = gameFactory;
             _progressService = progressService;
             _difficultService = difficultService;
+            _uiFactory = uiFactory;
         }
 
         public void Enter(string sceneName)
@@ -43,11 +46,15 @@ namespace Sources.Infrastructure.States
 
         private void OnLevelLoaded()
         {
+            InitUIRoot();
             InitGameWorld();
             InformProgressReaders();
             
             _gameStateMachine.Enter<GameLoopState>();
         }
+
+        private void InitUIRoot() => 
+            _uiFactory.CreateUIRoot();
 
         private void InformProgressReaders()
         {

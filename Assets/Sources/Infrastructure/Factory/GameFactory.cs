@@ -16,6 +16,8 @@ using Sources.StaticData.Hole;
 using Sources.StaticData.Loot;
 using Sources.StaticData.Weapon;
 using Sources.StaticData.Weapon.Grade;
+using Sources.UI;
+using Sources.UI.Services;
 using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -27,17 +29,19 @@ namespace Sources.Infrastructure.Factory
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly IInputSurvice _inputSurvice;
+        private readonly IWindowService _windowService;
 
         private GameObject _hole;
-        
+
         public List<ISavedProgressReader> SavedProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgressUpdater> SavedProgressUpdaters { get; } = new List<ISavedProgressUpdater>();
         
-        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice)
+        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice, IWindowService windowService)
         {
             _assets = assetProvider;
             _staticData = staticData;
             _inputSurvice = inputSurvice;
+            _windowService = windowService;
         }
 
         public void CreateHole()
@@ -56,6 +60,9 @@ namespace Sources.Infrastructure.Factory
 
             PlayerHealthUIView playerHealthUIView = hud.GetComponentInChildren<PlayerHealthUIView>();
             playerHealthUIView.Construct(_hole.GetComponent<IHealth>());
+
+            foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+                openWindowButton.Construct(_windowService);
         }
 
         public GameObject CreateWeapon(WeaponType type, Vector2 position)

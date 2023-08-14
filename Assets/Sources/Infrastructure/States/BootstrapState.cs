@@ -6,6 +6,8 @@ using Sources.Services.Difficult;
 using Sources.Services.Input;
 using Sources.Services.StaticData;
 using Sources.StaticData.Difficult;
+using Sources.UI.Factory;
+using Sources.UI.Services;
 using UnityEngine;
 
 namespace Sources.Infrastructure.States
@@ -42,7 +44,13 @@ namespace Sources.Infrastructure.States
             _services.RegisterSingle<IInputSurvice>(GetInputService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>(), _services.Single<IStaticDataService>(), _services.Single<IInputSurvice>()));
+            _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),_services.Single<IStaticDataService>()));
+            _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(
+                _services.Single<IAssets>(),
+                _services.Single<IStaticDataService>(),
+                _services.Single<IInputSurvice>(),
+                _services.Single<IWindowService>()));
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
         }
 

@@ -7,6 +7,7 @@ using Sources.Behaviour.UI;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Difficult;
+using Sources.UI.Factory;
 
 namespace Sources.Infrastructure
 {
@@ -24,7 +25,8 @@ namespace Sources.Infrastructure
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, 
                     services.Single<IGameFactory>(), 
                     services.Single<IPersistentProgressService>(), 
-                    services.Single<IDifficultService>()),
+                    services.Single<IDifficultService>(),
+                    services.Single<IUIFactory>()),
                 
                 [typeof(LoadProgressState)] = new LoadProgressState(this, 
                     services.Single<ISaveLoadService>(), 
