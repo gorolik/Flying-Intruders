@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using Sources.Services.Difficult;
 using Sources.StaticData.Enemy;
+using Sources.StaticData.Loot;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
@@ -42,10 +44,11 @@ namespace Sources.Behaviour.Enemy
             while (true)
             {
                 float difficultValue = GetDifficultValue();
+                print("Difficult: " + difficultValue);
                 
                 yield return new WaitForSeconds(_startSpawnCooldown / difficultValue);
                 
-                SpawnEnemy();
+                SpawnEnemy(difficultValue);
             }
         }
 
@@ -55,9 +58,32 @@ namespace Sources.Behaviour.Enemy
         private float GetPlayTime() => 
             Time.time - _startTime;
 
-        private void SpawnEnemy() => 
-            _gameFactory.CreateEnemy(EnemyType.Fly, transform, GetRandomSpawnPoint());
+        private void SpawnEnemy(float difficultValue)
+        {
+            GameObject enemy = _gameFactory.CreateEnemy(GetRandomEnemyTypeByDifficult(difficultValue), transform, GetRandomSpawnPoint(),difficultValue);
+            
+            if(Random.Range(0, 100) > 50)
+                _gameFactory.CreateEnemyLoot(enemy, LootType.UpgradeKit);
+        }
 
+        private EnemyType GetRandomEnemyTypeByDifficult(float difficult)
+        {
+            List<EnemyType> avibaleTypes = new List<EnemyType>();
+            
+            if(difficult > 20)
+                avibaleTypes.Add(EnemyType.Gnat);
+            else if(difficult > 15)
+                avibaleTypes.Add(EnemyType.Mosquito);
+            else if(difficult > 10)
+                avibaleTypes.Add(EnemyType.Wasp);
+            else if(difficult > 5)
+                avibaleTypes.Add(EnemyType.Midge);
+            else
+                avibaleTypes.Add(EnemyType.Fly);
+
+            return avibaleTypes[Random.Range(0, avibaleTypes.Count)];
+        }
+        
         private Vector2 GetRandomSpawnPoint()
         {
             int direction;

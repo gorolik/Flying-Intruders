@@ -5,6 +5,7 @@ using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Difficult;
 using Sources.Services.Input;
 using Sources.Services.StaticData;
+using Sources.StaticData.Difficult;
 using UnityEngine;
 
 namespace Sources.Infrastructure.States
@@ -47,8 +48,8 @@ namespace Sources.Infrastructure.States
 
         private void RegisterDifficultService()
         {
-            float difficultPerSecond = _services.Single<IStaticDataService>().GetDifficultData().DifficultPerSecond;
-            _services.RegisterSingle<IDifficultService>(new DifficultService(difficultPerSecond));
+            DifficultData difficultData = _services.Single<IStaticDataService>().GetDifficultData();
+            _services.RegisterSingle<IDifficultService>(new DifficultService(difficultData.DifficultPerSecond, difficultData.MaxDifficultValue));
         }
 
         private IInputSurvice GetInputService()

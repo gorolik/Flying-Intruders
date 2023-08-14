@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sources.Behaviour.Enemy;
 using Sources.Behaviour.HealthSystem;
+using Sources.Behaviour.Loot;
 using Sources.Behaviour.Projectile;
 using Sources.Behaviour.UI;
 using Sources.Behaviour.Weapon;
@@ -12,7 +13,9 @@ using Sources.Services.StaticData;
 using Sources.StaticData.Difficult;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
+using Sources.StaticData.Loot;
 using Sources.StaticData.Weapon;
+using Sources.StaticData.Weapon.Grade;
 using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -55,8 +58,9 @@ namespace Sources.Infrastructure.Factory
             playerHealthUIView.Construct(_hole.GetComponent<IHealth>());
         }
 
-        public void CreateWeapon(WeaponType type, Vector2 position)
+        public GameObject CreateWeapon(WeaponType type, Vector2 position)
         {
+            GradeData gradeData = _staticData.GetGradeData();
             WeaponData weaponData = _staticData.GetWeaponDataByType(type);
             GameObject weapon = CreateGameObject(weaponData.Prefab, position);
 
@@ -64,8 +68,21 @@ namespace Sources.Infrastructure.Factory
             aimer.Construct(_inputSurvice);
             
             WeaponShooter shooter = weapon.GetComponent<WeaponShooter>();
-            shooter.Construct(this, _inputSurvice);
+            shooter.Construct(this, _inputSurvice, gradeData.GradeProperties);
             shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown);
+
+            WeaponUnit unit = weapon.GetComponent<WeaponUnit>();
+            unit.Init(type);
+            
+            return weapon;
+        }
+
+        public void CreateWeaponUpgrader(WeaponType startWeaponType, Vector2 weaponPosition)
+        {
+            GameObject weaponUpgraderObject = CreateGameObject(AssetsPath.WeaponUpgrader);
+
+            WeaponUpgrader upgrader = weaponUpgraderObject.GetComponent<WeaponUpgrader>();
+            upgrader.Construct(this, startWeaponType, weaponPosition);
         }
 
         public void CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection)
@@ -79,8 +96,9 @@ namespace Sources.Infrastructure.Factory
             damager.Init(properties.Damage);
         }
 
-        public void CreateEnemy(EnemyType type, Transform parent, Vector2 position)
+        public GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position, float difficultValue)
         {
+            DifficultData difficultData = _staticData.GetDifficultData();
             EnemyData enemyData = _staticData.GetEnemyDataByType(type);
             
             GameObject enemy = CreateGameObject(enemyData.Prefab, position);
@@ -88,17 +106,30 @@ namespace Sources.Infrastructure.Factory
 
             MovingToHole mover = enemy.GetComponent<MovingToHole>();
             mover.Construct(_hole.transform);
-            mover.Init(enemyData.Speed);
+            mover.Init(enemyData.Speed + enemyData.Speed * difficultValue * difficultData.EnemyDifficultSpeedRatio);
 
             EnemyDamager damager = enemy.GetComponent<EnemyDamager>();
             damager.Construct(_hole.transform);
             damager.Init(enemyData.Damage, enemyData.DamageDistance);
 
             Health health = enemy.GetComponent<Health>();
-            health.Init(enemyData.Health);
+            health.Init(enemyData.Health + enemyData.Health * difficultValue * difficultData.EnemyDifficultHealthRatio);
 
             ScoreCollector scoreCollector = enemy.GetComponentInChildren<ScoreCollector>();
             scoreCollector.Init(enemyData.Score);
+
+            return enemy;
+        }
+
+        public void CreateEnemyLoot(GameObject enemy, LootType lootType)
+        {
+            LootData lootData = _staticData.GetLootDataByType(lootType);
+            EnemyLootContainer lootContainer = enemy.GetComponentInChildren<EnemyLootContainer>();
+
+            Item item = CreateGameObject(lootData.Prefab, lootContainer.transform.position).GetComponent<Item>();
+            item.Init(lootData);
+            
+            lootContainer.Init(item);
         }
 
         public void CreateEnemySpawner(IDifficultService difficult)

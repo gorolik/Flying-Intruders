@@ -3,7 +3,9 @@ using System.Linq;
 using Sources.StaticData.Difficult;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
+using Sources.StaticData.Loot;
 using Sources.StaticData.Weapon;
+using Sources.StaticData.Weapon.Grade;
 using UnityEngine;
 
 namespace Sources.Services.StaticData
@@ -12,15 +14,19 @@ namespace Sources.Services.StaticData
     {
         private HoleData _holeData;
         private DifficultData _difficultData;
+        private GradeData _gradeData;
         private Dictionary<EnemyType, EnemyData> _enemys;
         private Dictionary<WeaponType, WeaponData> _weapons;
+        private Dictionary<LootType, LootData> _items;
 
         public void LoadData()
         {
             LoadHoleData();
             LoadDifficultData();
+            LoadGradeData();
             LoadEnemysData();
             LoadWeaponData();
+            LoadLootData();
         }
 
         public HoleData GetHoleData() => 
@@ -29,17 +35,26 @@ namespace Sources.Services.StaticData
         public DifficultData GetDifficultData() => 
             _difficultData;
 
+        public GradeData GetGradeData() => 
+            _gradeData;
+
         public EnemyData GetEnemyDataByType(EnemyType type) => 
             _enemys.TryGetValue(type, out EnemyData data) ? data : null;
 
         public WeaponData GetWeaponDataByType(WeaponType type) => 
             _weapons.TryGetValue(type, out WeaponData data) ? data : null;
 
+        public LootData GetLootDataByType(LootType type) => 
+            _items.TryGetValue(type, out LootData data) ? data : null;
+
         private void LoadHoleData() => 
             _holeData = Resources.Load<HoleData>("StaticData/Hole/Hole");
 
         private void LoadDifficultData() => 
             _difficultData = Resources.Load<DifficultData>("StaticData/Difficult/DifficultData");
+
+        private void LoadGradeData() =>
+            _gradeData = Resources.Load<GradeData>("StaticData/Grade/GradeData");
 
         private void LoadEnemysData()
         {
@@ -54,5 +69,13 @@ namespace Sources.Services.StaticData
                 .LoadAll<WeaponData>("StaticData/Weapons")
                 .ToDictionary(x => x.Type, x => x);
         }
+        
+        private void LoadLootData()
+        {
+            _items = Resources
+                .LoadAll<LootData>("StaticData/Loot")
+                .ToDictionary(x => x.Type, x => x);
+        }
+
     }
 }

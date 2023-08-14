@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb4384c3c3ccb145a66ea0ccbdb85ff, type: 3}
+  m_Name: Midge
+  m_EditorClassIdentifier: 
+  _type: 1
+  _health: 15
+  _damage: 1
+  _damageDistance: 0.2
+  _speed: 3.5
+  _moveType: 0
+  _prefab: {fileID: 6174133263894411065, guid: d27e486bacb3df24198d1af310dcdd15, type: 3}
+  _score: 1

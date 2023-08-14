@@ -8,10 +8,9 @@ namespace Sources.Behaviour.Enemy
         [SerializeField] private MovingToHole _mover;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private Collider2D _collider;
-
+        [SerializeField] private float _destroyDelay = 2;
+        
         private bool _disappeared;
-
-        public bool Disappeared => _disappeared;
 
         private void OnEnable() => 
             _damager.DamageGived += OnDamageGived;
@@ -32,6 +31,8 @@ namespace Sources.Behaviour.Enemy
             _collider.enabled = false;
             _mover.enabled = false;
             _animator.Flew();
+            
+            Destroy(gameObject, _destroyDelay);
         }
     }
 }

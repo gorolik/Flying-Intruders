@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _difficultPerSecond: 0.1
   _startEnemySpawnCoolDown: 3
+  _maxDifficultValue: 35
+  _enemyDifficultSpeedRatio: 0.02
+  _enemyDifficultHealthRatio: 0.1

@@ -5,5 +5,6 @@
         public const string HudPath = "HUD";
         public const string HolePath = "HolePoint";
         public const string EnemySpawnerPath = "EnemySpawner";
+        public const string WeaponUpgrader = "WeaponUpgrader";
     }
 }

@@ -58,7 +58,7 @@ namespace Sources.Infrastructure.States
         private void InitGameWorld()
         {
             _gameFactory.CreateHole();
-            _gameFactory.CreateWeapon(_startWeaponType, GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
+            _gameFactory.CreateWeaponUpgrader(_startWeaponType, GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();
             _gameFactory.CreateEnemySpawner(_difficultService);
         }

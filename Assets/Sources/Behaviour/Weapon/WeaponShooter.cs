@@ -1,6 +1,7 @@
 ﻿using Sources.Behaviour.Projectile;
 using Sources.Infrastructure.Factory;
 using Sources.Services.Input;
+using Sources.StaticData.Weapon.Grade;
 using UnityEngine;
 
 namespace Sources.Behaviour.Weapon
@@ -12,33 +13,48 @@ namespace Sources.Behaviour.Weapon
         private ProjectileProperties _projectileProperties;
         private IInputSurvice _inputSurvice;
         private IGameFactory _gameFactory;
-        private float _cooldown;
+        private float _startCooldown;
         private float _currentCooldown;
-
-        public void Construct(IGameFactory gameFactory, IInputSurvice inputSurvice)
+        private float _cooldownTimer;
+        private GradeProperties _gradeProperties;
+        
+        public void Construct(IGameFactory gameFactory, IInputSurvice inputSurvice, GradeProperties gradeProperties)
         {
             _gameFactory = gameFactory;
             _inputSurvice = inputSurvice;
+            _gradeProperties = gradeProperties;
         }
 
-        public void Init(ProjectileProperties properties, float cooldown)
+        public void Init(ProjectileProperties properties, float startCooldown)
         {
             _projectileProperties = properties;
-            _cooldown = cooldown;
+            _startCooldown = startCooldown;
+            _currentCooldown = startCooldown;
         }
         
         private void Update()
         {
             if (!IsCooldownUp())
-                _currentCooldown -= Time.deltaTime;
+                _cooldownTimer -= Time.deltaTime;
             
             if (CanShoot())
                 Shoot();
         }
 
+        public void Upgrade(int grade)
+        {
+            if(grade > 5)
+                return;
+            
+            _currentCooldown = _startCooldown * Mathf.Pow(1 - _gradeProperties.CooldownGradePercent, grade);
+
+            _projectileProperties.Damage *= Mathf.Pow(1 + _gradeProperties.ProjectileDamageGradePercent, grade);
+            _projectileProperties.Speed *= Mathf.Pow(1 + _gradeProperties.ProjectileSpeedGradePercent, grade);
+        }
+
         private void Shoot()
         {
-            _currentCooldown = _cooldown;
+            _cooldownTimer = _currentCooldown;
 
             CreateProjectile();
         }
@@ -50,6 +66,6 @@ namespace Sources.Behaviour.Weapon
             _inputSurvice.IsClicked && IsCooldownUp();
 
         private bool IsCooldownUp() => 
-            _currentCooldown <= 0;
+            _cooldownTimer <= 0;
     }
 }

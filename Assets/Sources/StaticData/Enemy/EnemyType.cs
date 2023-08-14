@@ -3,5 +3,9 @@
     public enum EnemyType
     {
         Fly,
+        Midge,
+        Wasp,
+        Mosquito,
+        Gnat,
     }
 }
