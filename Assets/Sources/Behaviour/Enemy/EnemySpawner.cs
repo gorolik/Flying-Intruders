@@ -72,13 +72,13 @@ namespace Sources.Behaviour.Enemy
             
             if(difficult > 20)
                 avibaleTypes.Add(EnemyType.Gnat);
-            else if(difficult > 15)
+            if(difficult > 15)
                 avibaleTypes.Add(EnemyType.Mosquito);
-            else if(difficult > 10)
+            if(difficult > 10)
                 avibaleTypes.Add(EnemyType.Wasp);
-            else if(difficult > 5)
+            if(difficult > 5)
                 avibaleTypes.Add(EnemyType.Midge);
-            else
+            if(difficult <= 5)
                 avibaleTypes.Add(EnemyType.Fly);
 
             return avibaleTypes[Random.Range(0, avibaleTypes.Count)];

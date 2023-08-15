@@ -16,7 +16,7 @@ MonoBehaviour:
   _health: 35
   _damage: 1
   _damageDistance: 0.2
-  _speed: 2.4
+  _speed: 1.6
   _moveType: 0
   _prefab: {fileID: 4033660082014096769, guid: 4844da60c2b989e4590fb8307933dd1e, type: 3}
   _score: 2

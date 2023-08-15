@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a944225dc842548a2f5c4d7d3ad1eb, type: 3}
   m_Name: DifficultData
   m_EditorClassIdentifier: 
-  _difficultPerSecond: 0.1
-  _startEnemySpawnCoolDown: 3
+  _difficultPerSecond: 0.05
+  _startEnemySpawnCoolDown: 3.5
   _maxDifficultValue: 35
-  _enemyDifficultSpeedRatio: 0.02
+  _enemyDifficultSpeedRatio: 0.005
   _enemyDifficultHealthRatio: 0.1

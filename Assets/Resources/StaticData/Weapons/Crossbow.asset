@@ -18,4 +18,4 @@ MonoBehaviour:
     Speed: 16
     Damage: 20
   _cooldown: 1.6
-  _prefab: {fileID: 3559164276696282819, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
+  _prefab: {fileID: 905440129675374328, guid: 679fce56c03181f4f9f0732719e0f660, type: 3}

@@ -1,4 +1,5 @@
-﻿using Sources.Behaviour.Projectile;
+﻿using System;
+using Sources.Behaviour.Projectile;
 using Sources.Infrastructure.Factory;
 using Sources.Services.Input;
 using Sources.StaticData.Weapon.Grade;
@@ -17,7 +18,11 @@ namespace Sources.Behaviour.Weapon
         private float _currentCooldown;
         private float _cooldownTimer;
         private GradeProperties _gradeProperties;
+
+        public Action Shot;
         
+        public float CurrentCooldown => _currentCooldown;
+
         public void Construct(IGameFactory gameFactory, IInputSurvice inputSurvice, GradeProperties gradeProperties)
         {
             _gameFactory = gameFactory;
@@ -57,6 +62,7 @@ namespace Sources.Behaviour.Weapon
             _cooldownTimer = _currentCooldown;
 
             CreateProjectile();
+            Shot?.Invoke();
         }
 
         private void CreateProjectile() => 
