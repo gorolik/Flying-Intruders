@@ -18,9 +18,7 @@ using Sources.StaticData.Weapon;
 using Sources.StaticData.Weapon.Grade;
 using Sources.UI;
 using Sources.UI.Services;
-using Unity.Mathematics;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factory
 {
@@ -32,6 +30,7 @@ namespace Sources.Infrastructure.Factory
         private readonly IWindowService _windowService;
 
         private GameObject _hole;
+        private WeaponUpgrader _weaponUpgrader;
 
         public List<ISavedProgressReader> SavedProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgressUpdater> SavedProgressUpdaters { get; } = new List<ISavedProgressUpdater>();
@@ -60,6 +59,9 @@ namespace Sources.Infrastructure.Factory
 
             PlayerHealthUIView playerHealthUIView = hud.GetComponentInChildren<PlayerHealthUIView>();
             playerHealthUIView.Construct(_hole.GetComponent<IHealth>());
+
+            WeaponGradeUIView weaponGradeUIView = hud.GetComponentInChildren<WeaponGradeUIView>();
+            weaponGradeUIView.Construct(_weaponUpgrader);
 
             foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
                 openWindowButton.Construct(_windowService);
@@ -90,6 +92,8 @@ namespace Sources.Infrastructure.Factory
 
             WeaponUpgrader upgrader = weaponUpgraderObject.GetComponent<WeaponUpgrader>();
             upgrader.Construct(this, startWeaponType, weaponPosition);
+
+            _weaponUpgrader = upgrader;
         }
 
         public void CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection)

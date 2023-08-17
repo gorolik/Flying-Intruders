@@ -11,9 +11,13 @@ namespace Sources.Behaviour.Weapon
     {
         private WeaponUnit _weapon;
         private IGameFactory _gameFactory;
-        private int _grade;
         private WeaponType _currentType;
         private Vector2 _spawnPosition;
+        private int _grade = 1;
+
+        public int Grade => _grade;
+        
+        public Action<int> WeaponUpgraded;
 
         public void Construct(IGameFactory gameFactory, WeaponType startType, Vector2 spawnPosition)
         {
@@ -37,17 +41,25 @@ namespace Sources.Behaviour.Weapon
 
         private void Upgrade()
         {
-            _grade++;
-
-            if (_grade > 5 && (int)_currentType < Enum.GetNames(typeof(WeaponType)).Length - 1)
+            if (_grade >= 5 && !GunsOver())
+            {
                 ChangeWeapon(_currentType + 1);
-            else if(_grade <= 5)
+            }
+            else if (_grade <= 5)
+            {
+                _grade++;
                 _weapon.Shooter.Upgrade(_grade);
+            }
+            
+            WeaponUpgraded?.Invoke(_grade);
         }
+
+        private bool GunsOver() => 
+            (int)_currentType >= Enum.GetNames(typeof(WeaponType)).Length - 1;
 
         private void ChangeWeapon(WeaponType type)
         {
-            _grade = 0;
+            _grade = 1;
             
             if(_weapon != null)
                 Destroy(_weapon.gameObject);
