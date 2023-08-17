@@ -13,12 +13,11 @@ namespace Sources.Behaviour.Enemy
 
         private Animator _animator;
 
-        private void Awake()
-        {
+        private void Awake() => 
             _animator = GetComponent<Animator>();
-            
+
+        private void Start() => 
             SetMoveSpeed();
-        }
 
         private void SetMoveSpeed() => 
             _animator.SetFloat(SpeedHash, _moving.Speed);

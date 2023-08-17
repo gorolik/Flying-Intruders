@@ -1,6 +1,4 @@
 using Sources.Behaviour.Extensions;
-using Sources.Infrastructure.DI;
-using Sources.Infrastructure.Factory;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
