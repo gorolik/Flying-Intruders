@@ -16,4 +16,4 @@ MonoBehaviour:
   _startEnemySpawnCoolDown: 3.5
   _maxDifficultValue: 35
   _enemyDifficultSpeedRatio: 0.01
-  _enemyDifficultHealthRatio: 1
+  _enemyDifficultHealthRatio: 0.3

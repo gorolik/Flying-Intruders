@@ -56,11 +56,15 @@ namespace Sources.Behaviour.Weapon
             if (grade > 5)
                 return;
 
-            _currentCooldown = _startCooldown * Mathf.Pow(1 - _gradeProperties.CooldownGradePercent, grade);
-
-            _projectileProperties.Damage *= Mathf.Pow(1 + _gradeProperties.ProjectileDamageGradePercent, grade);
-            _projectileProperties.Speed *= Mathf.Pow(1 + _gradeProperties.ProjectileSpeedGradePercent, grade);
+            _currentCooldown = _startCooldown * CalculateGradeBonus(-_gradeProperties.CooldownGradePercent, grade);
+            _spread *= CalculateGradeBonus(-_gradeProperties.SpreadGradePercent, grade);
+            
+            _projectileProperties.Damage *= CalculateGradeBonus(_gradeProperties.ProjectileDamageGradePercent, grade);
+            _projectileProperties.Speed *= CalculateGradeBonus(_gradeProperties.ProjectileSpeedGradePercent, grade);
         }
+
+        private float CalculateGradeBonus(float gradePercent, int grade) => 
+            Mathf.Pow(1 + gradePercent, grade);
 
         private void Shoot()
         {
