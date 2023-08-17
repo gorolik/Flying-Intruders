@@ -12,7 +12,7 @@ namespace Sources.StaticData.Difficult
 
         [Header("Difficult Value")] 
         [SerializeField] [Range(0, 0.1f)] private float _enemyDifficultSpeedRatio;
-        [SerializeField] [Range(0, 0.1f)] private float _enemyDifficultHealthRatio;
+        [SerializeField] [Range(0, 1f)] private float _enemyDifficultHealthRatio;
 
         public float DifficultPerSecond => _difficultPerSecond;
         public float StartEnemySpawnCooldown => _startEnemySpawnCoolDown;

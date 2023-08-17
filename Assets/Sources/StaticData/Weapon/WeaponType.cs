@@ -3,5 +3,8 @@
     public enum WeaponType
     {
         Crossbow,
+        Pistol,
+        Shotgun,
+        MachineGun
     }
 }

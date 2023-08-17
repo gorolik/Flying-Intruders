@@ -8,12 +8,14 @@ namespace Sources.StaticData.Weapon
     {
         [SerializeField] private WeaponType _type;
         [SerializeField] private ProjectileProperties _projectileProperties;
-        [SerializeField] private float _cooldown;
+        [SerializeField] [Range(0.01f, 3)] private float _cooldown;
+        [SerializeField] [Range(0, 30)] private float _spread;
         [SerializeField] private GameObject _prefab;
 
         public WeaponType Type => _type;
         public ProjectileProperties ProjectileProperties => _projectileProperties;
         public float Cooldown => _cooldown;
+        public float Spead => _spread;
         public GameObject Prefab => _prefab;
     }
 }

@@ -40,7 +40,7 @@ namespace Sources.Behaviour.Weapon
             _grade++;
 
             if (_grade > 5 && (int)_currentType < Enum.GetNames(typeof(WeaponType)).Length - 1)
-                ChangeWeapon(_currentType++);
+                ChangeWeapon(_currentType + 1);
             else if(_grade <= 5)
                 _weapon.Shooter.Upgrade(_grade);
         }

@@ -4,6 +4,7 @@ using Sources.Infrastructure.Factory;
 using Sources.Services.Input;
 using Sources.StaticData.Weapon.Grade;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Sources.Behaviour.Weapon
 {
@@ -17,10 +18,11 @@ namespace Sources.Behaviour.Weapon
         private float _startCooldown;
         private float _currentCooldown;
         private float _cooldownTimer;
+        private float _spread;
         private GradeProperties _gradeProperties;
 
         public Action Shot;
-        
+
         public float CurrentCooldown => _currentCooldown;
 
         public void Construct(IGameFactory gameFactory, IInputSurvice inputSurvice, GradeProperties gradeProperties)
@@ -30,11 +32,12 @@ namespace Sources.Behaviour.Weapon
             _gradeProperties = gradeProperties;
         }
 
-        public void Init(ProjectileProperties properties, float startCooldown)
+        public void Init(ProjectileProperties properties, float startCooldown, float spread)
         {
             _projectileProperties = properties;
             _startCooldown = startCooldown;
             _currentCooldown = startCooldown;
+            _spread = spread;
         }
         
         private void Update()
@@ -66,7 +69,16 @@ namespace Sources.Behaviour.Weapon
         }
 
         private void CreateProjectile() => 
-            _gameFactory.CreateProjectile(_projectileProperties, _muzzlePoint.position, _muzzlePoint.up);
+            _gameFactory.CreateProjectile(_projectileProperties, _muzzlePoint.position, GetDirection(_muzzlePoint.up));
+
+        private Vector2 GetDirection(Vector2 muzzleDirection)
+        {
+            float deviation = Random.Range(-_spread, _spread);
+            float angle = Vector2.SignedAngle(Vector2.up, muzzleDirection) + deviation;
+            Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector3.up;
+
+            return direction;
+        }
 
         private bool CanShoot() => 
             _inputSurvice.IsClicked && IsCooldownUp();

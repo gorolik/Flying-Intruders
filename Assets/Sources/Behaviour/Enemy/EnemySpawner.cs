@@ -78,7 +78,7 @@ namespace Sources.Behaviour.Enemy
                 avibaleTypes.Add(EnemyType.Wasp);
             if(difficult > 5)
                 avibaleTypes.Add(EnemyType.Midge);
-            if(difficult <= 5)
+            if(difficult >= 0)
                 avibaleTypes.Add(EnemyType.Fly);
 
             return avibaleTypes[Random.Range(0, avibaleTypes.Count)];

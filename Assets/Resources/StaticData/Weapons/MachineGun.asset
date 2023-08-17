@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b83edfef37d16cc4b8c686c1fbeb6cc1, type: 3}
-  m_Name: Crossbow
+  m_Name: MachineGun
   m_EditorClassIdentifier: 
-  _type: 0
+  _type: 3
   _projectileProperties:
     Prefab: {fileID: 8830741472534025304, guid: cefbf0989e7104849b0e6b3899a27215, type: 3}
-    Speed: 15
-    Damage: 14
-  _cooldown: 0.8
-  _prefab: {fileID: 905440129675374328, guid: 679fce56c03181f4f9f0732719e0f660, type: 3}
+    Speed: 23
+    Damage: 60
+  _cooldown: 0.05
+  _prefab: {fileID: 8412215084044691032, guid: 1bcb841bf3c8d3a4e929b9caad5fc574, type: 3}
