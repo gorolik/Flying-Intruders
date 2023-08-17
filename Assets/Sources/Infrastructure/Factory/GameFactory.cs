@@ -76,7 +76,7 @@ namespace Sources.Infrastructure.Factory
             
             WeaponShooter shooter = weapon.GetComponent<WeaponShooter>();
             shooter.Construct(this, _inputSurvice, gradeData.GradeProperties);
-            shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown, weaponData.Spead);
+            shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown, weaponData.Spead, weaponData.ProjectilesCount);
 
             WeaponUnit unit = weapon.GetComponent<WeaponUnit>();
             unit.Init(type);

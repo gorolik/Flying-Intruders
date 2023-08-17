@@ -19,6 +19,7 @@ namespace Sources.Behaviour.Weapon
         private float _currentCooldown;
         private float _cooldownTimer;
         private float _spread;
+        private int _projectilesCount;
         private GradeProperties _gradeProperties;
 
         public Action Shot;
@@ -32,28 +33,29 @@ namespace Sources.Behaviour.Weapon
             _gradeProperties = gradeProperties;
         }
 
-        public void Init(ProjectileProperties properties, float startCooldown, float spread)
+        public void Init(ProjectileProperties properties, float startCooldown, float spread, int projectilesCount)
         {
             _projectileProperties = properties;
             _startCooldown = startCooldown;
             _currentCooldown = startCooldown;
             _spread = spread;
+            _projectilesCount = projectilesCount;
         }
-        
+
         private void Update()
         {
             if (!IsCooldownUp())
                 _cooldownTimer -= Time.deltaTime;
-            
+
             if (CanShoot())
                 Shoot();
         }
 
         public void Upgrade(int grade)
         {
-            if(grade > 5)
+            if (grade > 5)
                 return;
-            
+
             _currentCooldown = _startCooldown * Mathf.Pow(1 - _gradeProperties.CooldownGradePercent, grade);
 
             _projectileProperties.Damage *= Mathf.Pow(1 + _gradeProperties.ProjectileDamageGradePercent, grade);
@@ -64,12 +66,15 @@ namespace Sources.Behaviour.Weapon
         {
             _cooldownTimer = _currentCooldown;
 
-            CreateProjectile();
+            for (int i = 0; i < _projectilesCount; i++) 
+                CreateProjectile();
+
             Shot?.Invoke();
         }
 
-        private void CreateProjectile() => 
-            _gameFactory.CreateProjectile(_projectileProperties, _muzzlePoint.position, GetDirection(_muzzlePoint.up));
+        private void CreateProjectile() =>
+            _gameFactory.CreateProjectile(_projectileProperties, _muzzlePoint.position,
+                GetDirection(_muzzlePoint.up));
 
         private Vector2 GetDirection(Vector2 muzzleDirection)
         {
@@ -80,10 +85,10 @@ namespace Sources.Behaviour.Weapon
             return direction;
         }
 
-        private bool CanShoot() => 
+        private bool CanShoot() =>
             _inputSurvice.IsClicked && IsCooldownUp();
 
-        private bool IsCooldownUp() => 
+        private bool IsCooldownUp() =>
             _cooldownTimer <= 0;
     }
 }
