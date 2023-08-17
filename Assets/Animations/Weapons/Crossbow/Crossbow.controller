@@ -94,7 +94,7 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: ReloadSpeed
     m_Type: 1
-    m_DefaultFloat: 0.1
+    m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
@@ -168,4 +168,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -4217080134450402992}
+  m_DefaultState: {fileID: 3319327396454425693}
