@@ -149,8 +149,8 @@ namespace Sources.Infrastructure.Factory
             GameObject spawnerObject = CreateGameObject(AssetsPath.EnemySpawnerPath);
 
             EnemySpawner spawner = spawnerObject.GetComponent<EnemySpawner>();
-            spawner.Construct(this);
-            spawner.Init(difficult, difficultData.StartEnemySpawnCooldown);
+            spawner.Construct(this, difficult);
+            spawner.Init(difficultData.SpawnerData);
         }
 
         public void CleanUp()

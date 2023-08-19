@@ -4,6 +4,7 @@ using Sources.Infrastructure.Factory;
 using Sources.Services.Input;
 using Sources.StaticData.Weapon.Grade;
 using UnityEngine;
+using static Sources.Behaviour.Extensoins.GameFormulas;
 using Random = UnityEngine.Random;
 
 namespace Sources.Behaviour.Weapon
@@ -56,15 +57,12 @@ namespace Sources.Behaviour.Weapon
             if (grade > 5)
                 return;
 
-            _currentCooldown = _startCooldown * CalculateGradeBonus(-_gradeProperties.CooldownGradePercent, grade);
-            _spread *= CalculateGradeBonus(-_gradeProperties.SpreadGradePercent, grade);
+            _currentCooldown = _startCooldown * CalculatePercentIncrease(-_gradeProperties.CooldownGradePercent, grade);
+            _spread *= CalculatePercentIncrease(-_gradeProperties.SpreadGradePercent, grade);
             
-            _projectileProperties.Damage *= CalculateGradeBonus(_gradeProperties.ProjectileDamageGradePercent, grade);
-            _projectileProperties.Speed *= CalculateGradeBonus(_gradeProperties.ProjectileSpeedGradePercent, grade);
+            _projectileProperties.Damage *= CalculatePercentIncrease(_gradeProperties.ProjectileDamageGradePercent, grade);
+            _projectileProperties.Speed *= CalculatePercentIncrease(_gradeProperties.ProjectileSpeedGradePercent, grade);
         }
-
-        private float CalculateGradeBonus(float gradePercent, int grade) => 
-            Mathf.Pow(1 + gradePercent, grade);
 
         private void Shoot()
         {

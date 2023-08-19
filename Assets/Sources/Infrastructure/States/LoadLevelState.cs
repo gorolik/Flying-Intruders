@@ -1,5 +1,4 @@
-﻿using Sources.Behaviour;
-using Sources.Behaviour.UI;
+﻿using Sources.Behaviour.UI;
 using Sources.Infrastructure.Factory;
 using Sources.Infrastructure.PersistentProgress;
 using Sources.Services.Difficult;
@@ -9,7 +8,7 @@ using UnityEngine;
 
 namespace Sources.Infrastructure.States
 {
-    internal class LoadLevelState : IPayloadState<string>
+    public class LoadLevelState : IPayloadState<string>
     {
         private const string _weaponSpawnPointTag = "SpawnPoint";
         private const WeaponType _startWeaponType = WeaponType.Crossbow;

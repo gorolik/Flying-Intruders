@@ -1,9 +1,6 @@
 ﻿using System;
 using Sources.Behaviour.HealthSystem;
-using Sources.Infrastructure.DI;
-using Sources.Infrastructure.Factory;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Behaviour.Enemy
 {
