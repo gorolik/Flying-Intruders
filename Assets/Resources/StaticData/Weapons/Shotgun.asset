@@ -19,5 +19,5 @@ MonoBehaviour:
     Damage: 60
   _cooldown: 0.9
   _spread: 20
-  _projectileCount: 5
+  _projectileCount: 15
   _prefab: {fileID: 8354765838538468033, guid: ad8d5d09e11f77a42aa1f9c43fd531f2, type: 3}

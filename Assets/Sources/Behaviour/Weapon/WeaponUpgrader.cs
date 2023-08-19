@@ -45,7 +45,7 @@ namespace Sources.Behaviour.Weapon
             {
                 ChangeWeapon(_currentType + 1);
             }
-            else if (_grade <= 5)
+            else if (_grade < 5)
             {
                 _grade++;
                 _weapon.Shooter.Upgrade(_grade);

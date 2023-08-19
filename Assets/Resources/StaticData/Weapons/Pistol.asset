@@ -15,9 +15,9 @@ MonoBehaviour:
   _type: 1
   _projectileProperties:
     Prefab: {fileID: 8830741472534025304, guid: cefbf0989e7104849b0e6b3899a27215, type: 3}
-    Speed: 18
-    Damage: 35
-  _cooldown: 0.3
+    Speed: 20
+    Damage: 38
+  _cooldown: 0.28
   _spread: 0.5
   _projectileCount: 1
   _prefab: {fileID: 6405133807416762086, guid: 543a5a5602abb3c469e55e1fd3a67a44, type: 3}
