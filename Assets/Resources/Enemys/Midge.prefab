@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921160141073185057, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_Name
-      value: Midge Variant
+      value: Midge
       objectReference: {fileID: 0}
     - target: {fileID: 3234640396040966879, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_IsActive
@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 556dc515a3be85a4cb1cd3139cdffbc8, type: 3}
+    - target: {fileID: 7522110128642784012, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
+      propertyPath: m_Pitch
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2212711420272477684, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2212711420272477684, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921160141073185057, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_Name
-      value: Gnat Variant
+      value: Gnat
       objectReference: {fileID: 0}
     - target: {fileID: 3234640396040966879, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_IsActive
@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: eb6df615a9e66354fb0a6edc2c6b4d2e, type: 3}
+    - target: {fileID: 7522110128642784012, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
+      propertyPath: m_Pitch
+      value: 0.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

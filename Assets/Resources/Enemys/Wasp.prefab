@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2212711420272477684, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2212711420272477684, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921160141073185057, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_Name
-      value: Wasp Variant
+      value: Wasp
       objectReference: {fileID: 0}
     - target: {fileID: 3234640396040966879, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
       propertyPath: m_IsActive
@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7435dd78d07166040a2a871bd008db07, type: 3}
+    - target: {fileID: 7522110128642784012, guid: acec305682a76224fb680b07c5b6f82d, type: 3}
+      propertyPath: m_Pitch
+      value: 0.95
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

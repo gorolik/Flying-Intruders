@@ -7,7 +7,6 @@ namespace Sources.Behaviour.Projectile
     public class ProjectileMover : MonoBehaviour
     {
         private const int _flyerLayer = 6;
-        private const float _destroyDelay = 0.01f;
 
         private Vector2 _direction;
         private Vector2 _previousPosition;
@@ -59,7 +58,6 @@ namespace Sources.Behaviour.Projectile
         private void Collided(RaycastHit2D hit)
         {
             transform.position = hit.point;
-            Destroy(gameObject, _destroyDelay);
 
             _isCollided = true;
             OnCollided?.Invoke(hit);

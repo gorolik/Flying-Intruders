@@ -10,8 +10,10 @@ namespace Sources.Behaviour.Enemy
         [SerializeField] private Health _health;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private Collider2D _collider;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _dieSound;
 
-        private const float _destroyDelay = 5;
+        private const float _destroyDelay = 3;
 
         private EnemyMoving _mover;
         private bool _isDied;
@@ -43,6 +45,8 @@ namespace Sources.Behaviour.Enemy
             OnDie?.Invoke();
             
             _animator.Die();
+            _audioSource.PlayOneShot(_dieSound);
+            
             Destroy(gameObject, _destroyDelay);
         }
     }

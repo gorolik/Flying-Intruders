@@ -1,5 +1,4 @@
-﻿using System;
-using Sources.Behaviour.HealthSystem;
+﻿using Sources.Behaviour.HealthSystem;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
@@ -13,9 +12,7 @@ namespace Sources.Behaviour.Enemy
 
         protected override float Damage => _damage;
 
-        public Action DamageGived;
-
-        public void Construct(Transform hole) => 
+        public void Construct(Transform hole) =>
             _hole = hole;
 
         public void Init(float damage, float damageDistance)
@@ -23,20 +20,14 @@ namespace Sources.Behaviour.Enemy
             _damage = damage;
             _damageDistance = damageDistance;
         }
-        
+
         private void FixedUpdate()
         {
-            if (CanAttack())
-            {
-                if (TryDamage(_hole))
-                {
-                    _damageGived = true;
-                    DamageGived?.Invoke();
-                }
-            }
+            if (CanAttack() && TryDamage(_hole))
+                _damageGived = true;
         }
 
-        private bool CanAttack() => 
+        private bool CanAttack() =>
             _hole != null && !_damageGived && Vector2.Distance(_hole.position, transform.position) <= _damageDistance;
     }
 }
