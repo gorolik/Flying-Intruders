@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: b511ce4ce8add3b498292308c99cfec3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3559164276696282819, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
       propertyPath: m_Name
-      value: UltraGun Variant
+      value: UltraGun
       objectReference: {fileID: 0}
     - target: {fileID: 5250930173131441054, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
       propertyPath: _shotSound
@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 153e4482902cb8b4880a393160f9212b, type: 3}
     - target: {fileID: 6756884254395193461, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6756884254395193461, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
       propertyPath: m_LocalPosition.x
