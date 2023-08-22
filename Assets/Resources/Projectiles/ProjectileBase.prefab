@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mover: {fileID: 8248971648326315177}
   _damager: {fileID: 4169981196013437849}
+  _viewObject: {fileID: 4184848371416714811}
   _audioSource: {fileID: -7667819792125732686}
   _hitSound: {fileID: 8300000, guid: 2f7b9816d7ff6be4b81840f6d163be38, type: 3}
 --- !u!114 &8248971648326315177

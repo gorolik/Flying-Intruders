@@ -6,6 +6,7 @@ namespace Sources.Behaviour.Projectile
     {
         [SerializeField] private ProjectileMover _mover;
         [SerializeField] private ProjectileDamager _damager;
+        [SerializeField] private GameObject _viewObject;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _hitSound;
 
@@ -26,6 +27,7 @@ namespace Sources.Behaviour.Projectile
             if (_damager.TryDamage(hit.transform))
             {
                 OnDamageGived();
+                _viewObject.SetActive(false);
                 Destroy(gameObject, _hitSound.length);
             }
             else
