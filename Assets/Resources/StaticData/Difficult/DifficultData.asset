@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a944225dc842548a2f5c4d7d3ad1eb, type: 3}
+  m_Name: DifficultData
+  m_EditorClassIdentifier: 
+  _difficultPerSecond: 0.1
+  _maxDifficultValue: 45
+  _enemyDifficultSpeedRatio: 0.012
+  _enemyDifficultHealthRatio: 0.2
+  _spawnerData:
+    _startEnemySpawnCoolDown: 3
+    _minSpawnCoolDown: 0.1
+    _spawnCooldownDifficultPercent: 0.127
+    _upgradeEnemyStep: 1
+    _enemySpawnData:
+    - _type: 0
+      _minDifficult: 0
+      _preferredDifficult: 3
+      _spawnFrequency: 1
+    - _type: 1
+      _minDifficult: 3
+      _preferredDifficult: 9
+      _spawnFrequency: 0.18
+    - _type: 2
+      _minDifficult: 6
+      _preferredDifficult: 15
+      _spawnFrequency: 0.4
+    - _type: 3
+      _minDifficult: 12
+      _preferredDifficult: 20
+      _spawnFrequency: 0.6
+    - _type: 4
+      _minDifficult: 18
+      _preferredDifficult: 32
+      _spawnFrequency: 0.2

@@ -1,6 +1,6 @@
 ﻿using System;
+using Sources.Behaviour.Enemy.Move;
 using Sources.Behaviour.HealthSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Sources.Behaviour.Enemy
@@ -9,19 +9,22 @@ namespace Sources.Behaviour.Enemy
     {
         [SerializeField] private Health _health;
         [SerializeField] private EnemyAnimator _animator;
-        [SerializeField] private MovingToHole _move;
         [SerializeField] private Collider2D _collider;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _dieSound;
 
-        private const float _destroyDelay = 5;
-        
+        private const float _destroyDelay = 3;
+
+        private EnemyMoving _mover;
         private bool _isDied;
 
         public event Action OnDie;
 
-        private void OnEnable()
-        {
+        public void Construct(EnemyMoving mover) =>
+            _mover = mover;
+        
+        private void OnEnable() => 
             _health.OnHealthChanged += TryDie;
-        }
 
         private void TryDie(float healthValue)
         {
@@ -36,12 +39,14 @@ namespace Sources.Behaviour.Enemy
         {
             _isDied = true;
 
-            _move.enabled = false;
+            _mover.enabled = false;
             _collider.enabled = false;
             
             OnDie?.Invoke();
             
             _animator.Die();
+            _audioSource.PlayOneShot(_dieSound);
+            
             Destroy(gameObject, _destroyDelay);
         }
     }

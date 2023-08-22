@@ -1,19 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sources.Behaviour.Enemy;
+using Sources.Behaviour.Enemy.Move;
 using Sources.Behaviour.HealthSystem;
+using Sources.Behaviour.Loot;
 using Sources.Behaviour.Projectile;
 using Sources.Behaviour.UI;
 using Sources.Behaviour.Weapon;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.Services.Difficult;
 using Sources.Services.Input;
 using Sources.Services.StaticData;
+using Sources.StaticData.Difficult;
 using Sources.StaticData.Enemy;
 using Sources.StaticData.Hole;
+using Sources.StaticData.Loot;
 using Sources.StaticData.Weapon;
-using Unity.Mathematics;
+using Sources.StaticData.Weapon.Grade;
+using Sources.UI;
+using Sources.UI.Factory;
+using Sources.UI.Services;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using UnityEngine.UI;
 
 namespace Sources.Infrastructure.Factory
 {
@@ -22,17 +31,20 @@ namespace Sources.Infrastructure.Factory
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly IInputSurvice _inputSurvice;
+        private readonly IWindowService _windowService;
 
         private GameObject _hole;
-        
+        private WeaponUpgrader _weaponUpgrader;
+
         public List<ISavedProgressReader> SavedProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgressUpdater> SavedProgressUpdaters { get; } = new List<ISavedProgressUpdater>();
         
-        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice)
+        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice, IWindowService windowService)
         {
             _assets = assetProvider;
             _staticData = staticData;
             _inputSurvice = inputSurvice;
+            _windowService = windowService;
         }
 
         public void CreateHole()
@@ -51,10 +63,17 @@ namespace Sources.Infrastructure.Factory
 
             PlayerHealthUIView playerHealthUIView = hud.GetComponentInChildren<PlayerHealthUIView>();
             playerHealthUIView.Construct(_hole.GetComponent<IHealth>());
+
+            WeaponGradeUIView weaponGradeUIView = hud.GetComponentInChildren<WeaponGradeUIView>();
+            weaponGradeUIView.Construct(_weaponUpgrader);
+
+            foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+                openWindowButton.Construct(_windowService);
         }
 
-        public void CreateWeapon(WeaponType type, Vector2 position)
+        public GameObject CreateWeapon(WeaponType type, Vector2 position)
         {
+            GradeData gradeData = _staticData.GetGradeData();
             WeaponData weaponData = _staticData.GetWeaponDataByType(type);
             GameObject weapon = CreateGameObject(weaponData.Prefab, position);
 
@@ -62,8 +81,23 @@ namespace Sources.Infrastructure.Factory
             aimer.Construct(_inputSurvice);
             
             WeaponShooter shooter = weapon.GetComponent<WeaponShooter>();
-            shooter.Construct(this, _inputSurvice);
-            shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown);
+            shooter.Construct(this, _inputSurvice, gradeData.GradeProperties);
+            shooter.Init(weaponData.ProjectileProperties, weaponData.Cooldown, weaponData.Spead, weaponData.ProjectilesCount);
+
+            WeaponUnit unit = weapon.GetComponent<WeaponUnit>();
+            unit.Init(type);
+            
+            return weapon;
+        }
+
+        public void CreateWeaponUpgrader(WeaponType startWeaponType, Vector2 weaponPosition)
+        {
+            GameObject weaponUpgraderObject = CreateGameObject(AssetsPath.WeaponUpgrader);
+
+            WeaponUpgrader upgrader = weaponUpgraderObject.GetComponent<WeaponUpgrader>();
+            upgrader.Construct(this, startWeaponType, weaponPosition);
+
+            _weaponUpgrader = upgrader;
         }
 
         public void CreateProjectile(ProjectileProperties properties, Vector2 position, Vector2 startDirection)
@@ -77,35 +111,81 @@ namespace Sources.Infrastructure.Factory
             damager.Init(properties.Damage);
         }
 
-        public void CreateEnemy(EnemyType type, Transform parent, Vector2 position)
+        public GameObject CreateEnemy(EnemyType type, Transform parent, Vector2 position, float difficultValue)
         {
+            DifficultData difficultData = _staticData.GetDifficultData();
             EnemyData enemyData = _staticData.GetEnemyDataByType(type);
             
             GameObject enemy = CreateGameObject(enemyData.Prefab, position);
             enemy.transform.parent = parent;
 
-            MovingToHole mover = enemy.GetComponent<MovingToHole>();
+            EnemyMoving mover = CreateMoverByMoveType(enemyData, enemy);
             mover.Construct(_hole.transform);
-            mover.Init(enemyData.Speed);
+            mover.Init(enemyData.Speed + enemyData.Speed * difficultValue * difficultData.EnemyDifficultSpeedRatio);
 
             EnemyDamager damager = enemy.GetComponent<EnemyDamager>();
             damager.Construct(_hole.transform);
             damager.Init(enemyData.Damage, enemyData.DamageDistance);
 
             Health health = enemy.GetComponent<Health>();
-            health.Init(enemyData.Health);
+            health.Init(enemyData.Health + enemyData.Health * difficultValue * difficultData.EnemyDifficultHealthRatio);
+
+            EnemyDisappear disappear = enemy.GetComponent<EnemyDisappear>();
+            disappear.Construct(mover);
+            
+            EnemyDie die = enemy.GetComponent<EnemyDie>();
+            die.Construct(mover);
+
+            EnemyAnimator animator = enemy.GetComponentInChildren<EnemyAnimator>();
+            animator.Construct(mover);
 
             ScoreCollector scoreCollector = enemy.GetComponentInChildren<ScoreCollector>();
             scoreCollector.Init(enemyData.Score);
+
+            return enemy;
         }
 
-        public void CreateEnemySpawner(float spawnCooldown)
+        private EnemyMoving CreateMoverByMoveType(EnemyData enemyData, GameObject enemy)
         {
+            EnemyMoving mover;
+            
+            switch (enemyData.MoveType)
+            {
+                case MoveType.Direct:
+                    mover = enemy.AddComponent<DirectMoving>();
+                    break;
+                case MoveType.Sin:
+                    mover = enemy.AddComponent<SinMoving>();
+                    break;
+                case MoveType.Loop:
+                    mover = enemy.AddComponent<DirectMoving>();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return mover;
+        }
+
+        public void CreateEnemyLoot(GameObject enemy, LootType lootType)
+        {
+            LootData lootData = _staticData.GetLootDataByType(lootType);
+            EnemyLootContainer lootContainer = enemy.GetComponentInChildren<EnemyLootContainer>();
+
+            Item item = CreateGameObject(lootData.Prefab, lootContainer.transform.position).GetComponent<Item>();
+            item.Init(lootData);
+            
+            lootContainer.Init(item);
+        }
+
+        public void CreateEnemySpawner(IDifficultService difficult)
+        {
+            DifficultData difficultData = _staticData.GetDifficultData();
             GameObject spawnerObject = CreateGameObject(AssetsPath.EnemySpawnerPath);
 
             EnemySpawner spawner = spawnerObject.GetComponent<EnemySpawner>();
-            spawner.Construct(this);
-            spawner.Init(spawnCooldown);
+            spawner.Construct(this, difficult);
+            spawner.Init(difficultData.SpawnerData);
         }
 
         public void CleanUp()

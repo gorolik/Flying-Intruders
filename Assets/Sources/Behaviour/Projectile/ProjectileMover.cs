@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Behaviour.Extensions;
 using UnityEngine;
 
 namespace Sources.Behaviour.Projectile
@@ -6,7 +7,6 @@ namespace Sources.Behaviour.Projectile
     public class ProjectileMover : MonoBehaviour
     {
         private const int _flyerLayer = 6;
-        private const float _destroyDelay = 0.01f;
 
         private Vector2 _direction;
         private Vector2 _previousPosition;
@@ -23,6 +23,7 @@ namespace Sources.Behaviour.Projectile
             _projectileSpeed = projectileSpeed;
 
             _layerMask = 1 << _flyerLayer;
+            transform.LookAt2D((Vector2)transform.position + direction);
             
             _isInited = true;
         }
@@ -45,7 +46,7 @@ namespace Sources.Behaviour.Projectile
         private void Move()
         {
             _previousPosition = transform.position;
-            transform.Translate(_direction * (_projectileSpeed * Time.deltaTime));
+            transform.Translate(_direction * (_projectileSpeed * Time.deltaTime), Space.World);
         }
 
         private void TryCollide()
@@ -57,7 +58,6 @@ namespace Sources.Behaviour.Projectile
         private void Collided(RaycastHit2D hit)
         {
             transform.position = hit.point;
-            Destroy(gameObject, _destroyDelay);
 
             _isCollided = true;
             OnCollided?.Invoke(hit);

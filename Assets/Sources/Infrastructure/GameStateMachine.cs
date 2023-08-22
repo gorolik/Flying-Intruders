@@ -6,6 +6,8 @@ using Sources.Behaviour;
 using Sources.Behaviour.UI;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.PersistentProgress;
+using Sources.Services.Difficult;
+using Sources.UI.Factory;
 
 namespace Sources.Infrastructure
 {
@@ -19,8 +21,17 @@ namespace Sources.Infrastructure
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>()),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<ISaveLoadService>(), services.Single<IPersistentProgressService>()),
+                
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, 
+                    services.Single<IGameFactory>(), 
+                    services.Single<IPersistentProgressService>(), 
+                    services.Single<IDifficultService>(),
+                    services.Single<IUIFactory>()),
+                
+                [typeof(LoadProgressState)] = new LoadProgressState(this, 
+                    services.Single<ISaveLoadService>(), 
+                    services.Single<IPersistentProgressService>()),
+                
                 [typeof(GameLoopState)] = new GameLoopState(),
             };
         }

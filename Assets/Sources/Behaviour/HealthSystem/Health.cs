@@ -40,9 +40,6 @@ namespace Sources.Behaviour.HealthSystem
             CurrentValue = health;
         }
 
-        private void Start() => 
-            CurrentValue = MaxValue;
-
         public void TakeDamage(float value)
         {
             if (CurrentValue < 0)
