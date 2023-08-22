@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8835285401957137780}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.563, z: 0}
-  m_LocalScale: {x: 0.4441, y: 1.7187, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7009951, w: 0.7131662}
+  m_LocalPosition: {x: 0.209, y: 0.624, z: 0}
+  m_LocalScale: {x: 0.33, y: 0.33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4775723793436103082}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.014}
 --- !u!212 &2727759140600023622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 15
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.7904639, b: 0.6650944, a: 1}
+  m_Sprite: {fileID: 21300000, guid: fb31db425a2eafc448aba6ac9ec7f5d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,10 +92,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3143972928824495837, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.973
+      objectReference: {fileID: 0}
     - target: {fileID: 3559164276696282819, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 5250930173131441054, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
+      propertyPath: _shotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a2794458f6410fc44a13bcc6324b7a67, type: 3}
     - target: {fileID: 6756884254395193461, guid: 29cf8ebee2afab1428801d994b93d433, type: 3}
       propertyPath: m_RootOrder
       value: 0

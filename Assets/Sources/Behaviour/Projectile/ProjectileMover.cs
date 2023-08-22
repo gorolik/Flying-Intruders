@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Behaviour.Extensions;
 using UnityEngine;
 
 namespace Sources.Behaviour.Projectile
@@ -23,6 +24,7 @@ namespace Sources.Behaviour.Projectile
             _projectileSpeed = projectileSpeed;
 
             _layerMask = 1 << _flyerLayer;
+            transform.LookAt2D((Vector2)transform.position + direction);
             
             _isInited = true;
         }
@@ -45,7 +47,7 @@ namespace Sources.Behaviour.Projectile
         private void Move()
         {
             _previousPosition = transform.position;
-            transform.Translate(_direction * (_projectileSpeed * Time.deltaTime));
+            transform.Translate(_direction * (_projectileSpeed * Time.deltaTime), Space.World);
         }
 
         private void TryCollide()

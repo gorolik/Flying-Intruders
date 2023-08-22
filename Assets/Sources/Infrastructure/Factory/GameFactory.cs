@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sources.Behaviour.Enemy;
+using Sources.Behaviour.Enemy.Move;
 using Sources.Behaviour.HealthSystem;
 using Sources.Behaviour.Loot;
 using Sources.Behaviour.Projectile;
@@ -17,8 +19,10 @@ using Sources.StaticData.Loot;
 using Sources.StaticData.Weapon;
 using Sources.StaticData.Weapon.Grade;
 using Sources.UI;
+using Sources.UI.Factory;
 using Sources.UI.Services;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Sources.Infrastructure.Factory
 {
@@ -115,7 +119,7 @@ namespace Sources.Infrastructure.Factory
             GameObject enemy = CreateGameObject(enemyData.Prefab, position);
             enemy.transform.parent = parent;
 
-            MovingToHole mover = enemy.GetComponent<MovingToHole>();
+            EnemyMoving mover = CreateMoverByMoveType(enemyData, enemy);
             mover.Construct(_hole.transform);
             mover.Init(enemyData.Speed + enemyData.Speed * difficultValue * difficultData.EnemyDifficultSpeedRatio);
 
@@ -126,10 +130,41 @@ namespace Sources.Infrastructure.Factory
             Health health = enemy.GetComponent<Health>();
             health.Init(enemyData.Health + enemyData.Health * difficultValue * difficultData.EnemyDifficultHealthRatio);
 
+            EnemyDisappear disappear = enemy.GetComponent<EnemyDisappear>();
+            disappear.Construct(mover);
+            
+            EnemyDie die = enemy.GetComponent<EnemyDie>();
+            die.Construct(mover);
+
+            EnemyAnimator animator = enemy.GetComponentInChildren<EnemyAnimator>();
+            animator.Construct(mover);
+
             ScoreCollector scoreCollector = enemy.GetComponentInChildren<ScoreCollector>();
             scoreCollector.Init(enemyData.Score);
 
             return enemy;
+        }
+
+        private EnemyMoving CreateMoverByMoveType(EnemyData enemyData, GameObject enemy)
+        {
+            EnemyMoving mover;
+            
+            switch (enemyData.MoveType)
+            {
+                case MoveType.Direct:
+                    mover = enemy.AddComponent<DirectMoving>();
+                    break;
+                case MoveType.Sin:
+                    mover = enemy.AddComponent<SinMoving>();
+                    break;
+                case MoveType.Loop:
+                    mover = enemy.AddComponent<DirectMoving>();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return mover;
         }
 
         public void CreateEnemyLoot(GameObject enemy, LootType lootType)

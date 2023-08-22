@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Sources.UI.Factory
 {
-    class UIFactory : IUIFactory
+    public class UIFactory : IUIFactory
     {
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
-        
-        private Transform _uiRoot;
+
+        public Transform UIRoot { get; private set; }
 
         public UIFactory(IAssets assets, IStaticDataService staticData)
         {
@@ -20,10 +20,10 @@ namespace Sources.UI.Factory
         public void CreateUIRoot()
         {
             Transform uiRoot = Object.Instantiate(_assets.GetPrefabByPath(AssetsPath.UIRootPath)).transform;
-            _uiRoot = uiRoot;
+            UIRoot = uiRoot;
         }
 
         public void CreatePause() => 
-            Object.Instantiate(_staticData.GetWindowById(WindowId.Pause).Prefab, _uiRoot);
+            Object.Instantiate(_staticData.GetWindowById(WindowId.Pause).Prefab, UIRoot);
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2212711420272477684}
   - component: {fileID: 3648455208204821253}
-  - component: {fileID: 7345758859027224015}
   - component: {fileID: 3136038957019321450}
   - component: {fileID: 1271355292777342239}
   - component: {fileID: 6993638376110309194}
@@ -84,18 +83,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7345758859027224015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2921160141073185057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190afa3002efd794e9e10c7b09d4ec6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3136038957019321450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 3136038957019321450}
   _animator: {fileID: 226585758823608362}
-  _move: {fileID: 7345758859027224015}
   _collider: {fileID: 3648455208204821253}
 --- !u!114 &3563264122188018082
 MonoBehaviour:
@@ -149,9 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damager: {fileID: 1271355292777342239}
-  _mover: {fileID: 7345758859027224015}
   _animator: {fileID: 226585758823608362}
   _collider: {fileID: 3648455208204821253}
+  _destroyDelay: 2
 --- !u!1 &3234640396040966879
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e688a3e03a871a4ba030624d35842c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moving: {fileID: 7345758859027224015}
+  _mover: {fileID: 0}
 --- !u!1 &7963360799857174519
 GameObject:
   m_ObjectHideFlags: 0

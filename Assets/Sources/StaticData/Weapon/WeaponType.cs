@@ -5,6 +5,7 @@
         Crossbow,
         Pistol,
         Shotgun,
-        MachineGun
+        MachineGun,
+        UltraGun,
     }
 }

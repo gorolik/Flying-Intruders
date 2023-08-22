@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a944225dc842548a2f5c4d7d3ad1eb, type: 3}
   m_Name: DifficultData
   m_EditorClassIdentifier: 
-  _difficultPerSecond: 0.3
-  _maxDifficultValue: 35
+  _difficultPerSecond: 0.1
+  _maxDifficultValue: 45
   _enemyDifficultSpeedRatio: 0.012
   _enemyDifficultHealthRatio: 0.2
   _spawnerData:
     _startEnemySpawnCoolDown: 3
-    _spawnCooldownDifficultPercent: 0.1
+    _minSpawnCoolDown: 0.018
+    _spawnCooldownDifficultPercent: 0.127
     _upgradeEnemyStep: 1
     _enemySpawnData:
     - _type: 0
@@ -39,5 +40,5 @@ MonoBehaviour:
       _spawnFrequency: 0.6
     - _type: 4
       _minDifficult: 18
-      _preferredDifficult: 28
-      _spawnFrequency: 0.3
+      _preferredDifficult: 32
+      _spawnFrequency: 0.2

@@ -9,8 +9,8 @@ namespace Sources.UI.Windows
 
         private void Start()
         {
-            Init();
             SubscribeUpdates();
+            Init();
         }
 
         private void OnEnable()

@@ -61,7 +61,7 @@ namespace Sources.Behaviour.Enemy
             _difficultService.GetDifficult(GetPlayTime());
 
         private float GetSpawnCooldown(float difficultValue) => 
-        _data.StartEnemySpawnCoolDown * GameFormulas.CalculatePercentIncrease(-_data.SpawnCooldownDifficultPercent, difficultValue);
+            Mathf.Clamp(_data.StartEnemySpawnCoolDown * GameFormulas.CalculatePercentIncrease(-_data.SpawnCooldownDifficultPercent, difficultValue), _data.MinSpawnCoolDown, _data.StartEnemySpawnCoolDown);
 
         private float GetPlayTime() =>
             Time.time - _startTime;
