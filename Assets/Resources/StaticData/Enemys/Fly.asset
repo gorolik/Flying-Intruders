@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fly
   m_EditorClassIdentifier: 
   _type: 0
-  _health: 20
+  _health: 21
   _damage: 1
   _damageDistance: 0.3
   _speed: 1.5

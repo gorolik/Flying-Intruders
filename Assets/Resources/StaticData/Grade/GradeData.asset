@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GradeData
   m_EditorClassIdentifier: 
   _gradeProperties:
-    CooldownGradePercent: 0.05
-    SpreadGradePercent: 0.03
-    ProjectileSpeedGradePercent: 0.05
+    CooldownGradePercent: 0.045
+    SpreadGradePercent: 0.025
+    ProjectileSpeedGradePercent: 0.04
     ProjectileDamageGradePercent: 0.1

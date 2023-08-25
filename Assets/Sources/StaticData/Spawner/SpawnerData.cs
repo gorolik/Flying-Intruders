@@ -8,7 +8,7 @@ namespace Sources.StaticData.Spawner
     public struct SpawnerData
     {
         [SerializeField] [Range(1, 10)] private float _startEnemySpawnCoolDown;
-        [SerializeField] [Range(0.1f, 0.3f)] private float _minSpawnCoolDown;
+        [SerializeField] [Range(0.05f, 0.2f)] private float _minSpawnCoolDown;
         [SerializeField] [Range(0.01f, 0.3f)] private float _spawnCooldownDifficultPercent;
         [SerializeField] [Range(0.1f, 2)] private float _upgradeEnemyStep;
         [SerializeField] private List<EnemySpawnData> _enemySpawnData;
