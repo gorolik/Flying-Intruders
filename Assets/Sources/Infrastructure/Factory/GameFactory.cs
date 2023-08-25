@@ -121,7 +121,7 @@ namespace Sources.Infrastructure.Factory
 
             EnemyMoving mover = CreateMoverByMoveType(enemyData, enemy);
             mover.Construct(_hole.transform);
-            mover.Init(enemyData.Speed + enemyData.Speed * difficultValue * difficultData.EnemyDifficultSpeedRatio);
+            mover.Init(enemyData.MoveData,difficultValue * difficultData.EnemyDifficultSpeedRatio);
 
             EnemyDamager damager = enemy.GetComponent<EnemyDamager>();
             damager.Construct(_hole.transform);
@@ -149,7 +149,7 @@ namespace Sources.Infrastructure.Factory
         {
             EnemyMoving mover;
             
-            switch (enemyData.MoveType)
+            switch (enemyData.MoveData.MoveType)
             {
                 case MoveType.Direct:
                     mover = enemy.AddComponent<DirectMoving>();
