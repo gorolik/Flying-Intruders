@@ -30,22 +30,27 @@ namespace Sources.Infrastructure.States
         }
 
         public void Enter() => 
-            _sceneLoader.Load(_initialScene, EnterLoadLevel);
+            _sceneLoader.Load(_initialScene, EnterMainMenu);
 
         public void Exit() {}
 
-        private void EnterLoadLevel() => 
+        private void EnterMainMenu() => 
             _gameStateMachine.Enter<LoadProgressState>();
 
         private void RegisterServices()
         {
             RegisterStaticDataService();
             RegisterDifficultService();
+            _services.RegisterSingle<IGameStateMachine>(_gameStateMachine);
             _services.RegisterSingle<IInputSurvice>(GetInputService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
             _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssets>(),_services.Single<IStaticDataService>()));
             _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
+            _services.RegisterSingle<IMenuFactory>(new MenuFactory(
+                _services.Single<IGameStateMachine>(),
+                _services.Single<IAssets>(),
+                _services.Single<IPersistentProgressService>()));
             _services.RegisterSingle<IGameFactory>(new GameFactory(
                 _services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),

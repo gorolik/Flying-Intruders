@@ -1,8 +1,6 @@
-﻿using Sources.Infrastructure.DI;
-
-namespace Sources.Infrastructure.PersistentProgress
+﻿namespace Sources.Infrastructure.PersistentProgress
 {
-    public class PersistentProgressService : IService, IPersistentProgressService
+    public class PersistentProgressService : IPersistentProgressService
     {
         public PlayerProgress PlayerProgress { get; set; }
     }

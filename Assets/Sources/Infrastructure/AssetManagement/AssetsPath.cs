@@ -9,5 +9,6 @@ namespace Sources.Infrastructure.AssetManagement
         public const string EnemySpawnerPath = "EnemySpawner";
         public const string WeaponUpgrader = "WeaponUpgrader";
         public const string UIRootPath = "UIRoot";
+        public const string MainMenuHudPath = "MainMenuHUD";
     }
 }

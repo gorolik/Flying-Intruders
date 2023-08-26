@@ -11,7 +11,7 @@ using Sources.UI.Factory;
 
 namespace Sources.Infrastructure
 {
-    public class GameStateMachine
+    public class GameStateMachine : IGameStateMachine
     {
         private Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
@@ -22,15 +22,19 @@ namespace Sources.Infrastructure
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
                 
+                [typeof(LoadProgressState)] = new LoadProgressState(this, 
+                    services.Single<ISaveLoadService>(), 
+                    services.Single<IPersistentProgressService>()),
+                
+                [typeof(MainMenuState)] = new MainMenuState(sceneLoader, curtain, 
+                    services.Single<IUIFactory>(), 
+                    services.Single<IMenuFactory>()),
+                
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, 
                     services.Single<IGameFactory>(), 
                     services.Single<IPersistentProgressService>(), 
                     services.Single<IDifficultService>(),
                     services.Single<IUIFactory>()),
-                
-                [typeof(LoadProgressState)] = new LoadProgressState(this, 
-                    services.Single<ISaveLoadService>(), 
-                    services.Single<IPersistentProgressService>()),
                 
                 [typeof(GameLoopState)] = new GameLoopState(),
             };
