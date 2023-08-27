@@ -18,7 +18,7 @@ MonoBehaviour:
   _enemyDifficultHealthRatio: 0.182
   _spawnerData:
     _startEnemySpawnCoolDown: 3
-    _minSpawnCoolDown: 0.09
+    _minSpawnCoolDown: 0.07
     _spawnCooldownDifficultPercent: 0.127
     _upgradeEnemyStep: 1
     _enemySpawnData:
