@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b83edfef37d16cc4b8c686c1fbeb6cc1, type: 3}
-  m_Name: UltraGun
+  m_Name: AK-47
   m_EditorClassIdentifier: 
   _type: 4
   _projectileProperties:
     Prefab: {fileID: 5688643260181992330, guid: 08cdc0b6679dd6d4ebf9fa9f0c9caa0c, type: 3}
     Speed: 32
-    Damage: 110
-  _cooldown: 0.11
-  _spread: 10
-  _projectileCount: 2
-  _prefab: {fileID: 5019005944097357750, guid: d99f03332ab717c4e912fbd171357795, type: 3}
+    Damage: 165
+  _cooldown: 0.09
+  _spread: 3
+  _projectileCount: 1
+  _prefab: {fileID: 8412215084044691032, guid: 1bcb841bf3c8d3a4e929b9caad5fc574, type: 3}

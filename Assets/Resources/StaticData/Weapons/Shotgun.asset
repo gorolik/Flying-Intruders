@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83edfef37d16cc4b8c686c1fbeb6cc1, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  _type: 2
+  _type: 3
   _projectileProperties:
     Prefab: {fileID: 5062472777768302411, guid: 260065a8a2acae041921279792930888, type: 3}
-    Speed: 21
-    Damage: 55
-  _cooldown: 0.8
+    Speed: 23
+    Damage: 80
+  _cooldown: 0.65
   _spread: 20
-  _projectileCount: 9
+  _projectileCount: 11
   _prefab: {fileID: 8354765838538468033, guid: ad8d5d09e11f77a42aa1f9c43fd531f2, type: 3}

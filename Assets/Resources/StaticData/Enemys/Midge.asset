@@ -23,7 +23,7 @@ MonoBehaviour:
   _moveData:
     _moveType: 1
     _speed: 3.4
-    _verticalSpeed: 7
-    _amplitude: 0.01
+    _verticalSpeed: 2.5
+    _amplitude: 0.005
   _prefab: {fileID: 6174133263894411065, guid: d27e486bacb3df24198d1af310dcdd15, type: 3}
   _score: 1

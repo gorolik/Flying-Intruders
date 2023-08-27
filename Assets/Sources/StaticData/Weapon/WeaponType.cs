@@ -4,8 +4,9 @@
     {
         Crossbow,
         Pistol,
+        SubMachine,
         Shotgun,
+        AK,
         MachineGun,
-        UltraGun,
     }
 }
