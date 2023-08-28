@@ -13,13 +13,17 @@ namespace Sources.UI.Windows
         private void OnEnable()
         {
             SubscribeUpdates();
-            _closeButton.onClick.AddListener(Close);
+            
+            if(_closeButton != null)
+                _closeButton.onClick.AddListener(Close);
         }
 
         private void OnDisable()
         {
             Cleanup();
-            _closeButton.onClick.RemoveListener(Close);
+            
+            if(_closeButton != null)
+                _closeButton.onClick.RemoveListener(Close);
         }
 
         private void Close() => 

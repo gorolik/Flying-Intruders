@@ -6,5 +6,6 @@ namespace Sources.UI.Factory
     {
         void CreateUIRoot();
         void CreatePause();
+        void CreateGameOver();
     }
 }

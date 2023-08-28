@@ -29,10 +29,21 @@ namespace Sources.UI.Factory
 
         public void CreatePause()
         {
-            WindowBase window = Object.Instantiate(_staticData.GetWindowById(WindowId.Pause).Prefab, UIRoot);
+            WindowBase window = InstantiateByWindowId(WindowId.Pause);
             
             PauseWindow pauseWindow = window as PauseWindow;
             pauseWindow.Construct(_gameStateMachine);
         }
+
+        public void CreateGameOver()
+        {
+            WindowBase window = InstantiateByWindowId(WindowId.GameOver);
+            
+            GameOverWindow gameOverWindow = window as GameOverWindow;
+            gameOverWindow.Construct(_gameStateMachine);
+        }
+        
+        private WindowBase InstantiateByWindowId(WindowId id) =>
+            Object.Instantiate(_staticData.GetWindowById(id).Prefab, UIRoot);
     }
 }

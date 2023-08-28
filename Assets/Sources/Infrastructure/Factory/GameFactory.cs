@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sources.Behaviour;
 using Sources.Behaviour.Enemy;
 using Sources.Behaviour.Enemy.Move;
 using Sources.Behaviour.HealthSystem;
@@ -33,6 +34,7 @@ namespace Sources.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IInputSurvice _inputSurvice;
         private readonly IWindowService _windowService;
+        private readonly IUIFactory _uiFactory;
 
         private GameObject _hole;
         private WeaponUpgrader _weaponUpgrader;
@@ -40,12 +42,13 @@ namespace Sources.Infrastructure.Factory
         public List<ISavedProgressReader> SavedProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgressUpdater> SavedProgressUpdaters { get; } = new List<ISavedProgressUpdater>();
         
-        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice, IWindowService windowService)
+        public GameFactory(IAssets assetProvider, IStaticDataService staticData, IInputSurvice inputSurvice, IWindowService windowService, IUIFactory uiFactory)
         {
             _assets = assetProvider;
             _staticData = staticData;
             _inputSurvice = inputSurvice;
             _windowService = windowService;
+            _uiFactory = uiFactory;
         }
 
         public void CreateHole()
@@ -56,6 +59,9 @@ namespace Sources.Infrastructure.Factory
 
             Health health = _hole.GetComponent<Health>();
             health.Init(holeData.Health);
+
+            PlayerDie playerDie = _hole.GetComponent<PlayerDie>();
+            playerDie.Construct(_uiFactory);
         }
 
         public void CreateHud()

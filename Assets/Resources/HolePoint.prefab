@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3746485456031607709}
   - component: {fileID: 943744511985438734}
+  - component: {fileID: 1439163491483010455}
   m_Layer: 0
   m_Name: HolePoint
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba1a7bc0c9f7dd4d9ac987c6decefdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1439163491483010455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919554366670849191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f7b34b9ff0c6f47bc85d08d4931f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 943744511985438734}
 --- !u!1 &7831238372460299601
 GameObject:
   m_ObjectHideFlags: 0

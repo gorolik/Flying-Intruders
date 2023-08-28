@@ -58,7 +58,8 @@ namespace Sources.Infrastructure.States
                 _services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
                 _services.Single<IInputSurvice>(),
-                _services.Single<IWindowService>()));
+                _services.Single<IWindowService>(),
+                _services.Single<IUIFactory>()));
             _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
         }
 

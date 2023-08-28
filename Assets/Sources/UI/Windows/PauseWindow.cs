@@ -18,16 +18,16 @@ namespace Sources.UI.Windows
             Time.timeScale = 0;
 
         protected override void SubscribeUpdates() => 
-            _menuButton.onClick.AddListener(ToMainMenu);
+            _menuButton.onClick.AddListener(OnToMainMenuButtonClicked);
 
         protected override void Cleanup()
         {
-            _menuButton.onClick.RemoveListener(ToMainMenu);
+            _menuButton.onClick.RemoveListener(OnToMainMenuButtonClicked);
             
             Time.timeScale = 1;
         }
 
-        private void ToMainMenu() => 
+        private void OnToMainMenuButtonClicked() => 
             _gameStateMachine.Enter<MainMenuState>();
     }
 }
