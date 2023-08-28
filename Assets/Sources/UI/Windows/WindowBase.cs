@@ -7,11 +7,8 @@ namespace Sources.UI.Windows
     {
         [SerializeField] private Button _closeButton;
 
-        private void Start()
-        {
-            SubscribeUpdates();
+        private void Start() => 
             Init();
-        }
 
         private void OnEnable()
         {

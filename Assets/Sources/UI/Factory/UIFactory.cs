@@ -1,5 +1,7 @@
-﻿using Sources.Infrastructure.AssetManagement;
+﻿using Sources.Infrastructure;
+using Sources.Infrastructure.AssetManagement;
 using Sources.Services.StaticData;
+using Sources.UI.Windows;
 using UnityEngine;
 
 namespace Sources.UI.Factory
@@ -8,13 +10,15 @@ namespace Sources.UI.Factory
     {
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
+        private readonly IGameStateMachine _gameStateMachine;
 
         public Transform UIRoot { get; private set; }
 
-        public UIFactory(IAssets assets, IStaticDataService staticData)
+        public UIFactory(IAssets assets, IStaticDataService staticData, IGameStateMachine gameStateMachine)
         {
             _assets = assets;
             _staticData = staticData;
+            _gameStateMachine = gameStateMachine;
         }
 
         public void CreateUIRoot()
@@ -23,7 +27,12 @@ namespace Sources.UI.Factory
             UIRoot = uiRoot;
         }
 
-        public void CreatePause() => 
-            Object.Instantiate(_staticData.GetWindowById(WindowId.Pause).Prefab, UIRoot);
+        public void CreatePause()
+        {
+            WindowBase window = Object.Instantiate(_staticData.GetWindowById(WindowId.Pause).Prefab, UIRoot);
+            
+            PauseWindow pauseWindow = window as PauseWindow;
+            pauseWindow.Construct(_gameStateMachine);
+        }
     }
 }
