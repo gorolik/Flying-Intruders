@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Sources.Behaviour.Extensoins;
+using Sources.Behaviour.Extensions;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using Sources.Services.Difficult;

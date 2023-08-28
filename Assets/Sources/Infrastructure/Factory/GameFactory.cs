@@ -6,6 +6,7 @@ using Sources.Behaviour.HealthSystem;
 using Sources.Behaviour.Loot;
 using Sources.Behaviour.Projectile;
 using Sources.Behaviour.UI;
+using Sources.Behaviour.UI.Indicators;
 using Sources.Behaviour.Weapon;
 using Sources.Infrastructure.AssetManagement;
 using Sources.Infrastructure.PersistentProgress;

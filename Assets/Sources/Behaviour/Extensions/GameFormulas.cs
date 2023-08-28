@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.Behaviour.Extensoins
+namespace Sources.Behaviour.Extensions
 {
     public static class GameFormulas
     {

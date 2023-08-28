@@ -5,7 +5,7 @@ using Sources.Services.Input;
 using Sources.StaticData.Weapon.Grade;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static Sources.Behaviour.Extensoins.GameFormulas;
+using static Sources.Behaviour.Extensions.GameFormulas;
 using Random = UnityEngine.Random;
 
 namespace Sources.Behaviour.Weapon
