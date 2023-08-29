@@ -8,5 +8,6 @@ namespace Sources.Behaviour.HealthSystem
         float MaxValue { get; }
         
         event Action<float> OnHealthChanged;
+        void TakeHealth(int value);
     }
 }

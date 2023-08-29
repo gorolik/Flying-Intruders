@@ -21,6 +21,8 @@ MonoBehaviour:
     _minSpawnCoolDown: 0.07
     _spawnCooldownDifficultPercent: 0.127
     _upgradeEnemyStep: 1
+    _playerHealthLootTrigger: 5
+    _healthLootCooldown: 30
     _enemySpawnData:
     - _type: 0
       _minDifficult: 0

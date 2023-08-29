@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sources.Behaviour.Extensions;
+using Sources.Behaviour.HealthSystem;
 using Sources.Infrastructure.DI;
 using Sources.Infrastructure.Factory;
 using Sources.Services.Difficult;
@@ -19,13 +21,16 @@ namespace Sources.Behaviour.Enemy
         private float _startTime;
         private IGameFactory _gameFactory;
         private IDifficultService _difficultService;
+        private IHealth _playerHealth;
         private Camera _camera;
         private Vector2 _screenSize;
         private SpawnerData _data;
         private int _upgradeIteration = 2;
+        private float _healthLootTimer;
 
-        public void Construct(IGameFactory gameFactory, IDifficultService difficultService)
+        public void Construct(IGameFactory gameFactory, IDifficultService difficultService, IHealth playerHealth)
         {
+            _playerHealth = playerHealth;
             _gameFactory = gameFactory;
             _difficultService = difficultService;
         }
@@ -39,6 +44,17 @@ namespace Sources.Behaviour.Enemy
             _screenSize = GetScreenFrame(_camera);
             GetGameFactory();
             StartCoroutine(EnemySpawnCycle());
+        }
+
+        private void Update()
+        {
+            if (_healthLootTimer > 0)
+            {
+                _healthLootTimer -= Time.deltaTime;
+
+                if (_healthLootTimer < 0)
+                    _healthLootTimer = 0;
+            }
         }
 
         private IEnumerator EnemySpawnCycle()
@@ -70,7 +86,8 @@ namespace Sources.Behaviour.Enemy
         {
             GameObject enemy = _gameFactory.CreateEnemy(GetRandomEnemyTypeByDifficult(difficultValue), transform, GetRandomSpawnPoint(), difficultValue);
 
-            TryGiveUpgradeLoot(difficultValue, enemy);
+            if (TryGiveUpgradeLoot(difficultValue, enemy) == false)
+                TryGiveHealthLoot(enemy);
         }
 
         private bool TryGiveUpgradeLoot(float difficultValue, GameObject enemy)
@@ -79,6 +96,18 @@ namespace Sources.Behaviour.Enemy
             {
                 _upgradeIteration++;
                 _gameFactory.CreateEnemyLoot(enemy, LootType.UpgradeKit);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool TryGiveHealthLoot(GameObject enemy)
+        {
+            if (_playerHealth.CurrentValue <= _data.PlayerHealthLootTrigger && _healthLootTimer <= 0)
+            {
+                _gameFactory.CreateEnemyLoot(enemy, LootType.HealthKit);
+                _healthLootTimer = _data.HealthLootCooldown;
                 return true;
             }
 

@@ -1,7 +1,7 @@
-﻿using Sources.Behaviour.Enemy;
+﻿using Sources.Behaviour.Loot;
 using UnityEngine;
 
-namespace Sources.Behaviour.Loot
+namespace Sources.Behaviour.Enemy
 {
     public class EnemyLootContainer : MonoBehaviour
     {

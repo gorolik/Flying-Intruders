@@ -42,10 +42,18 @@ namespace Sources.Behaviour.HealthSystem
 
         public void TakeDamage(float value)
         {
-            if (CurrentValue < 0)
+            if (value < 0)
                 throw new ArgumentOutOfRangeException(value.ToString());
 
             CurrentValue -= value;
+        }
+
+        public void TakeHealth(int value)
+        {
+            if(value < 0)
+                throw new ArgumentOutOfRangeException(value.ToString());
+
+            CurrentValue += value;
         }
     }
 }

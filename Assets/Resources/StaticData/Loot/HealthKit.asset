@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41d9f699af04456459d64f1a1f0044e3, type: 3}
-  m_Name: LootData
+  m_Name: HealthKit
   m_EditorClassIdentifier: 
-  _type: 1
-  _prefab: {fileID: 2949249088247656847, guid: 022d1cd42444fe24e81d54dc526f03f9, type: 3}
+  _type: 0
+  _prefab: {fileID: 5018502144909896037, guid: f9c0ab5e2c1819a43848b01edc7088a9, type: 3}

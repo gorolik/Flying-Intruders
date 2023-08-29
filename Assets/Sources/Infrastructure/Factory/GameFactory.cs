@@ -191,7 +191,7 @@ namespace Sources.Infrastructure.Factory
             GameObject spawnerObject = CreateGameObject(AssetsPath.EnemySpawnerPath);
 
             EnemySpawner spawner = spawnerObject.GetComponent<EnemySpawner>();
-            spawner.Construct(this, difficult);
+            spawner.Construct(this, difficult, _hole.GetComponent<Health>());
             spawner.Init(difficultData.SpawnerData);
         }
 

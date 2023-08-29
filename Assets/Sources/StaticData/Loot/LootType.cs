@@ -2,7 +2,7 @@
 {
     public enum LootType
     {
-        RepaitKit,
+        HealthKit,
         UpgradeKit,
     }
 }
