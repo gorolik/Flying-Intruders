@@ -12,7 +12,7 @@ namespace Sources.Behaviour.Weapon
 {
     public class WeaponShooter : MonoBehaviour
     {
-        private const float _playSoundCooldown = 0.065f;
+        private const float _playSoundCooldown = 0.08f;
         
         [SerializeField] private Transform _muzzlePoint;
         [Header("Audio")] 
