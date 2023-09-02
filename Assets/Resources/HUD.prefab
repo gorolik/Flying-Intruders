@@ -953,7 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _score: {fileID: 491729414403302410}
   _display: {fileID: 7704481113902528050}
-  _displayPrefix: 'Best score: '
+  _displayPrefix: "\u0420\u0435\u043A\u043E\u0440\u0434:  "
 --- !u!1 &3237000957494491793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,7 +3398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _display: {fileID: 4332385190426035773}
-  _prefix: 'Score: '
+  _prefix: "\u0421\u0447\u0451\u0442: "
 --- !u!1 &8672668486473940917
 GameObject:
   m_ObjectHideFlags: 0
