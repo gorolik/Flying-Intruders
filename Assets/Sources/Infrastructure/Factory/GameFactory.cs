@@ -5,6 +5,7 @@ using Sources.Behaviour.Enemy;
 using Sources.Behaviour.Enemy.Move;
 using Sources.Behaviour.HealthSystem;
 using Sources.Behaviour.Loot;
+using Sources.Behaviour.Player;
 using Sources.Behaviour.Projectile;
 using Sources.Behaviour.UI;
 using Sources.Behaviour.UI.Indicators;
@@ -76,6 +77,14 @@ namespace Sources.Infrastructure.Factory
 
             foreach (OpenWindowButton openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
                 openWindowButton.Construct(_windowService);
+        }
+
+        public void CreateCrosshair()
+        {
+            GameObject crosshairObject = CreateGameObject(AssetsPath.CrosshairPath);
+
+            Crosshair crosshair = crosshairObject.GetComponent<Crosshair>();
+            crosshair.Construct(_inputSurvice, _uiFactory);
         }
 
         public GameObject CreateWeapon(WeaponType type, Vector2 position)
@@ -152,28 +161,6 @@ namespace Sources.Infrastructure.Factory
             return enemy;
         }
 
-        private EnemyMoving CreateMoverByMoveType(EnemyData enemyData, GameObject enemy)
-        {
-            EnemyMoving mover;
-            
-            switch (enemyData.MoveData.MoveType)
-            {
-                case MoveType.Direct:
-                    mover = enemy.AddComponent<DirectMoving>();
-                    break;
-                case MoveType.Sin:
-                    mover = enemy.AddComponent<SinMoving>();
-                    break;
-                case MoveType.Loop:
-                    mover = enemy.AddComponent<DirectMoving>();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            return mover;
-        }
-
         public void CreateEnemyLoot(GameObject enemy, LootType lootType)
         {
             LootData lootData = _staticData.GetLootDataByType(lootType);
@@ -200,7 +187,29 @@ namespace Sources.Infrastructure.Factory
             SavedProgressReaders.Clear();
             SavedProgressUpdaters.Clear();
         }
-        
+
+        private EnemyMoving CreateMoverByMoveType(EnemyData enemyData, GameObject enemy)
+        {
+            EnemyMoving mover;
+            
+            switch (enemyData.MoveData.MoveType)
+            {
+                case MoveType.Direct:
+                    mover = enemy.AddComponent<DirectMoving>();
+                    break;
+                case MoveType.Sin:
+                    mover = enemy.AddComponent<SinMoving>();
+                    break;
+                case MoveType.Loop:
+                    mover = enemy.AddComponent<DirectMoving>();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return mover;
+        }
+
         private GameObject CreateGameObject(GameObject prefab, Vector2 position)
         {
             GameObject gameObject = _assets.Instantiate(prefab, position); 

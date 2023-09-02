@@ -10,5 +10,6 @@ namespace Sources.Infrastructure.AssetManagement
         public const string WeaponUpgrader = "WeaponUpgrader";
         public const string UIRootPath = "UIRoot";
         public const string MainMenuHudPath = "MainMenuHUD";
+        public const string CrosshairPath = "Crosshair";
     }
 }

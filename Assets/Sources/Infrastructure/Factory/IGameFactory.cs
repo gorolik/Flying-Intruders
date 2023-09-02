@@ -24,5 +24,6 @@ namespace Sources.Infrastructure.Factory
         void CreateEnemyLoot(GameObject enemy, LootType lootType);
         void CreateEnemySpawner(IDifficultService difficult);
         void CleanUp();
+        void CreateCrosshair();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Sources.Behaviour.Extensions;
 using UnityEngine;
 
-namespace Sources.Behaviour
+namespace Sources.Behaviour.Loot
 {
     public class ChildRotationStabilizator : MonoBehaviour
     {

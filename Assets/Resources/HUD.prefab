@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9307925, b: 0.6745283, a: 1}
+  m_Color: {r: 1, g: 0.81960785, b: 0.08235294, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9307925, b: 0.6745283, a: 1}
+  m_Color: {r: 1, g: 0.81960785, b: 0.08235294, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9307925, b: 0.6745283, a: 1}
+  m_Color: {r: 1, g: 0.81960785, b: 0.08235294, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Best: 000'
+  m_text: "\u0420\u0435\u043A\u043E\u0440\u0434: 000"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 678ffec7ae6501a4ca017bbbf826ebb9, type: 2}
   m_sharedMaterial: {fileID: -283135140073794137, guid: 678ffec7ae6501a4ca017bbbf826ebb9, type: 2}
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1592,8 +1592,8 @@ MonoBehaviour:
   - {fileID: 5610401051836456039}
   - {fileID: 7026574814615179311}
   - {fileID: 7500889053848528922}
-  _enabledIndicatorColor: {r: 1, g: 0.55609226, b: 0.495283, a: 1}
-  _disabledIndicatorColor: {r: 0.38679248, g: 0.25039515, b: 0.23171058, a: 1}
+  _enabledIndicatorColor: {r: 1, g: 0.34509805, b: 0.3882353, a: 1}
+  _disabledIndicatorColor: {r: 0.54901963, g: 0.23137255, b: 0.2509804, a: 1}
 --- !u!1 &4196535742445913679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1690,7 @@ MonoBehaviour:
   - {fileID: 8651636949386538340}
   - {fileID: 9041975204249915798}
   - {fileID: 5446516294400496301}
-  _enabledIndicatorColor: {r: 1, g: 0.9294118, b: 0.6745098, a: 1}
+  _enabledIndicatorColor: {r: 1, g: 0.81960785, b: 0.08235294, a: 1}
   _disabledIndicatorColor: {r: 0.4339623, g: 0.39711642, b: 0.26406196, a: 1}
 --- !u!1 &4315087053435266181
 GameObject:
@@ -1754,7 +1754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2164,7 +2164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2288,7 +2288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9307925, b: 0.6745283, a: 1}
+  m_Color: {r: 1, g: 0.81960785, b: 0.08235294, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9307925, b: 0.6745283, a: 1}
+  m_Color: {r: 1, g: 0.81960785, b: 0.08235294, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2938,7 +2938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3316,7 +3316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 000'
+  m_text: "\u0421\u0447\u0451\u0442: 000"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 678ffec7ae6501a4ca017bbbf826ebb9, type: 2}
   m_sharedMaterial: {fileID: -283135140073794137, guid: 678ffec7ae6501a4ca017bbbf826ebb9, type: 2}
@@ -3499,7 +3499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7129635, b: 0.6745098, a: 1}
+  m_Color: {r: 0.5471698, g: 0.22970808, b: 0.25061876, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -1,7 +1,7 @@
 ﻿using Sources.Behaviour.HealthSystem;
 using Sources.UI.Factory;
 
-namespace Sources.Behaviour
+namespace Sources.Behaviour.Player
 {
     public class PlayerDie : DieObserver
     {

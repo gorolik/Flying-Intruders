@@ -1,4 +1,5 @@
-﻿using Sources.Infrastructure.DI;
+﻿using System;
+using Sources.Infrastructure.DI;
 
 namespace Sources.UI.Factory
 {
@@ -7,5 +8,6 @@ namespace Sources.UI.Factory
         void CreateUIRoot();
         void CreatePause();
         void CreateGameOver();
+        Action<int> ActiveWindowsCountChanged { get; set; }
     }
 }

@@ -63,6 +63,7 @@ namespace Sources.Infrastructure.States
 
         private void InitGameWorld()
         {
+            _gameFactory.CreateCrosshair();
             _gameFactory.CreateHole();
             _gameFactory.CreateWeaponUpgrader(_startWeaponType, GameObject.FindGameObjectWithTag(_weaponSpawnPointTag).transform.position);
             _gameFactory.CreateHud();

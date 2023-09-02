@@ -3,7 +3,7 @@ using Sources.Behaviour.Loot;
 using Sources.StaticData.Loot;
 using UnityEngine;
 
-namespace Sources.Behaviour
+namespace Sources.Behaviour.Player
 {
     public class PlayerHealer : MonoBehaviour
     {
