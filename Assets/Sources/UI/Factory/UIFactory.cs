@@ -17,7 +17,7 @@ namespace Sources.UI.Factory
         
         private List<WindowBase> _activeWindows = new List<WindowBase>();
 
-        public Action<int> ActiveWindowsCountChanged { get; set; }
+        public event Action<int> ActiveWindowsCountChanged;
 
         public Transform UIRoot { get; private set; }
 

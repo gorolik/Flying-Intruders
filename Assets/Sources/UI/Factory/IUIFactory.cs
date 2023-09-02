@@ -8,6 +8,6 @@ namespace Sources.UI.Factory
         void CreateUIRoot();
         void CreatePause();
         void CreateGameOver();
-        Action<int> ActiveWindowsCountChanged { get; set; }
+        event Action<int> ActiveWindowsCountChanged;
     }
 }

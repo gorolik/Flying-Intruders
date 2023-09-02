@@ -12,6 +12,8 @@ namespace Sources.Behaviour.Weapon
 {
     public class WeaponShooter : MonoBehaviour
     {
+        private const float _playSoundCooldown = 0.065f;
+        
         [SerializeField] private Transform _muzzlePoint;
         [Header("Audio")] 
         [SerializeField] private AudioSource _audioSource;
@@ -21,15 +23,16 @@ namespace Sources.Behaviour.Weapon
         private IInputSurvice _inputSurvice;
         private IGameFactory _gameFactory;
         private EventSystem _eventSystem;
+        private float _lastShotTime;
+        private float _lastPlaySoundTime;
         private float _startCooldown;
         private float _currentCooldown;
-        private float _cooldownTimer;
         private float _spread;
         private int _projectilesCount;
         private GradeProperties _gradeProperties;
 
-        public Action Shot;
-
+        public event Action Shot;
+        
         public float CurrentCooldown => _currentCooldown;
 
         public void Construct(IGameFactory gameFactory, IInputSurvice inputSurvice, GradeProperties gradeProperties)
@@ -53,9 +56,6 @@ namespace Sources.Behaviour.Weapon
 
         private void Update()
         {
-            if (!IsCooldownUp())
-                _cooldownTimer -= Time.deltaTime;
-
             if (CanShoot())
                 Shoot();
         }
@@ -74,14 +74,14 @@ namespace Sources.Behaviour.Weapon
 
         private void Shoot()
         {
-            _cooldownTimer = _currentCooldown;
+            _lastShotTime = Time.time;
 
             for (int i = 0; i < _projectilesCount; i++) 
                 CreateProjectile(i, _projectilesCount);
 
             Shot?.Invoke();
-            
-            _audioSource.PlayOneShot(_shotSound);
+
+            TryPlayShotSound();
         }
 
         private void CreateProjectile(int currentProjectileId, int totalProjectiles) =>
@@ -100,10 +100,22 @@ namespace Sources.Behaviour.Weapon
             return direction;
         }
 
+        private void TryPlayShotSound()
+        {
+            if (CanPlaySound())
+            {
+                _lastPlaySoundTime = Time.time;
+                _audioSource.PlayOneShot(_shotSound);
+            }
+        }
+
         private bool CanShoot() =>
             _inputSurvice.IsClicked && IsCooldownUp() && !_eventSystem.IsPointerOverGameObject();
 
         private bool IsCooldownUp() =>
-            _cooldownTimer <= 0;
+            Time.time - _lastShotTime > _currentCooldown;
+
+        private bool CanPlaySound() => 
+            Time.time - _lastPlaySoundTime > _playSoundCooldown;
     }
 }
